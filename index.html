@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Prov kapitel 1–3 · Ledarskap och organisation</title>
+<style>
+:root{
+ --teal:#36A1B2;--teal-d:#1C6976;--teal-dd:#124a53;--teal-l:#E4F4F7;
+ --pink:#D6336C;--pink-d:#A81E4E;--pink-l:#FCE9F0;
+ --yel:#F6C343;--yel-d:#6E5000;--yel-l:#FFF5D6;
+ --ink:#15232A;--muted:#52636B;--line:#D9E5E9;--bg:#F3F8F9;--card:#fff;
+ --ok:#1D7A49;--okbg:#E3F5EB;--bad:#B3243A;--badbg:#FDECEF;
+ --r:18px;--sh:0 1px 2px rgba(18,74,83,.06),0 8px 24px rgba(18,74,83,.08);--sh2:0 2px 4px rgba(18,74,83,.08),0 16px 36px rgba(18,74,83,.14);
+ --font:"Source Sans 3","Source Sans Pro","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);font-size:17px;line-height:1.55;color:var(--ink);background:
+ radial-gradient(1200px 420px at 85% -120px,rgba(214,51,108,.10),transparent 70%),
+ radial-gradient(1000px 480px at -10% -160px,rgba(54,161,178,.18),transparent 70%),var(--bg);min-height:100vh}
+a{color:var(--teal-d)}
+h1,h2,h3{line-height:1.2;letter-spacing:-.01em;margin:0}
+h1{font-size:clamp(1.6rem,4.2vw,2.3rem);font-weight:800;color:var(--teal-dd)}
+h2{font-size:1.3rem;font-weight:800;color:var(--teal-dd)}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:.45em 0}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;padding:8px 14px;border-radius:10px;z-index:100}
+.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Toppfält */
+#bar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.bi{max-width:980px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;flex:1;min-width:0}
+.logo .mk{width:36px;height:36px;border-radius:11px;flex:none;display:grid;place-items:center;color:#fff;font-size:1.05rem;background:linear-gradient(135deg,var(--teal),var(--teal-d));box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+.logo span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo small{font-weight:600;color:var(--muted)}
+.chips{display:flex;gap:6px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;font-weight:700;padding:5px 11px;border-radius:99px;background:var(--teal-l);color:var(--teal-dd);white-space:nowrap;border:0;font-family:inherit}
+.chip.mode-prov{background:var(--pink-l);color:var(--pink-d)}
+.chip.pts{background:var(--yel);color:#3b2a00}
+button.chip{cursor:pointer}
+#app{max-width:980px;margin:0 auto;padding:18px 16px 80px}
+/* Knappar */
+.btn{font:inherit;font-weight:700;border:0;border-radius:14px;padding:12px 20px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;line-height:1.2;transition:transform .12s ease,box-shadow .12s ease,background .2s;min-height:46px}
+.btn:active{transform:translateY(2px)}
+.btn.pri{background:linear-gradient(180deg,#e04b80,var(--pink-d));color:#fff;box-shadow:0 4px 0 #7f1239,0 8px 18px rgba(214,51,108,.28)}
+.btn.pri:hover{transform:translateY(-1px)}
+.btn.tea{background:linear-gradient(180deg,#3fb0c1,var(--teal-d));color:#fff;box-shadow:0 4px 0 #0e4149,0 8px 18px rgba(28,105,118,.25)}
+.btn.tea:hover{transform:translateY(-1px)}
+.btn.sec{background:#fff;color:var(--teal-dd);border:2px solid var(--teal);box-shadow:0 2px 0 rgba(18,74,83,.12)}
+.btn.sec:hover{background:var(--teal-l)}
+.btn.ghost{background:transparent;color:var(--muted);border:2px dashed var(--line)}
+.btn.sm{padding:8px 14px;font-size:.92rem;min-height:38px;border-radius:11px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+/* Kort */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:18px}
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:stretch;margin-bottom:18px}
+.hero .intro{padding:22px}
+.eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--pink-d)}
+.lead{color:var(--muted);font-size:1.02rem}
+.field{display:flex;flex-direction:column;gap:5px;margin:14px 0 4px}
+.field label{font-weight:700;font-size:.92rem}
+input[type=text],textarea{font:inherit;color:var(--ink);padding:11px 13px;border:2px solid #b9cdd3;border-radius:12px;background:#fff;width:100%;transition:border-color .15s,box-shadow .15s}
+input[type=text]:focus,textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(54,161,178,.2)}
+textarea{min-height:140px;resize:vertical}
+.seg{display:inline-flex;background:#EAF2F4;border-radius:14px;padding:4px;gap:4px;flex-wrap:wrap}
+.seg button{font:inherit;font-weight:700;border:0;background:transparent;color:var(--muted);padding:9px 14px;border-radius:11px;cursor:pointer;transition:background .15s,color .15s,box-shadow .15s;min-height:42px}
+.seg button[aria-pressed=true]{background:#fff;color:var(--teal-dd);box-shadow:0 2px 6px rgba(18,74,83,.15)}
+.seg.pink button[aria-pressed=true]{color:var(--pink-d)}.seg button.good[aria-pressed=true]{background:var(--ok);color:#fff}.seg button.badp[aria-pressed=true]{background:var(--bad);color:#fff}.seg button:disabled{cursor:default}
+.modeinfo{font-size:.92rem;color:var(--muted);margin-top:6px}
+.overall{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:22px;background:linear-gradient(160deg,#fff 30%,var(--teal-l))}
+.lvl{font-weight:800;color:var(--teal-dd)}
+.ring{position:relative;flex:none}
+.ring svg{transform:rotate(-90deg);display:block}
+.ring .bg{stroke:#E3ECEF}
+.ring .fg{stroke-linecap:round;transition:stroke-dasharray .9s cubic-bezier(.2,.8,.2,1)}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;color:var(--teal-dd);line-height:1.1}
+.ring .num small{font-weight:600;color:var(--muted);font-size:.72rem}
+/* Kapitel */
+.chgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ch{--c:var(--teal);--cd:var(--teal-dd);--cl:var(--teal-l);padding:0;overflow:hidden;display:flex;flex-direction:column;animation:rise .45s both}
+.ch.pink{--c:var(--pink);--cd:var(--pink-d);--cl:var(--pink-l)}
+.ch.yellow{--c:var(--yel);--cd:var(--yel-d);--cl:var(--yel-l)}
+.chhead{padding:16px 16px 12px;background:linear-gradient(135deg,var(--cl),#fff 75%);border-bottom:1px solid var(--line)}
+.chnum{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cd)}
+.chnum i{width:10px;height:10px;border-radius:50%;background:var(--c);display:inline-block}
+.chhead h2{font-size:1.08rem;margin:4px 0 10px;color:var(--ink)}
+.pbar{height:10px;border-radius:99px;background:#E6EEF0;overflow:hidden}
+.pbar>span{display:block;height:100%;border-radius:99px;background:var(--c,var(--teal));transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.pmeta{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);margin-top:6px;gap:8px}
+.exlist{list-style:none;margin:0;padding:8px}
+.exlist a{display:flex;align-items:center;gap:11px;padding:10px;border-radius:12px;text-decoration:none;color:var(--ink);transition:background .15s,transform .15s}
+.exlist a:hover{background:var(--cl);transform:translateX(3px)}
+.exico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--cl);font-size:1.15rem;flex:none}
+.exl{flex:1;min-width:0}
+.ext{font-weight:700;font-size:.95rem;line-height:1.25}
+.ext{display:block}.exm{display:inline-block;font-size:.8rem;color:var(--muted);margin-right:8px}.exs{display:inline-flex;align-items:center;gap:6px;margin-top:3px}.exlist .go{font-size:1.4rem;color:#9fb3b9;transition:transform .15s}.exlist a:hover .go{transform:translateX(3px);color:var(--cd)}
+.st{font-size:.78rem;font-weight:800;padding:3px 9px;border-radius:99px;background:#EEF3F4;color:var(--muted);white-space:nowrap}
+.st.done{background:var(--okbg);color:var(--ok)}
+.st.part{background:var(--yel-l);color:var(--yel-d)}
+.stars{color:#E0A800;letter-spacing:1px;font-size:.9rem;white-space:nowrap}.stars .off{color:#CFD9DC}
+.panel{margin-top:18px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.note{background:var(--yel-l);border:1px solid #F2DD9A;color:#4d3a00;border-radius:14px;padding:12px 14px;font-size:.95rem}
+.note.pink{background:var(--pink-l);border-color:#F4C2D3;color:#6b1533}
+/* Övning */
+.crumb{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:800;border-radius:99px;padding:4px 11px;background:var(--teal-l);color:var(--teal-dd)}
+.tag.pink{background:var(--pink-l);color:var(--pink-d)}.tag.yellow{background:var(--yel-l);color:var(--yel-d)}
+.tag.kind{background:#fff;border:1px solid var(--line);color:var(--muted)}
+.exhead{margin-bottom:12px}
+.prog{display:flex;align-items:center;gap:12px;margin:12px 0}
+.prog .pbar{flex:1}
+.prog .pt{font-size:.88rem;color:var(--muted);white-space:nowrap;font-weight:600}
+.instr{color:var(--muted)}
+.q{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 1px 2px rgba(18,74,83,.05);transition:border-color .25s,background .25s;animation:rise .35s both}
+.q.ok{border-color:#9fd4b5;background:linear-gradient(180deg,var(--okbg),#fff 70%)}
+.q.no{border-color:#efb3bd;background:linear-gradient(180deg,var(--badbg),#fff 70%)}
+.qt{display:flex;gap:11px;font-weight:700;margin-bottom:10px}
+.qn{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--teal-dd);color:#fff;font-size:.88rem;font-weight:800}
+.q.ok .qn{background:var(--ok)}.q.no .qn{background:var(--bad)}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;margin:7px 0;border:2px solid var(--line);border-radius:13px;background:#fff;cursor:pointer;transition:border-color .15s,background .15s,transform .12s}
+.opt:hover{border-color:#9ccbd3;background:#F7FBFC}
+.opt:has(input:checked){border-color:var(--teal);background:var(--teal-l)}
+.opt input{margin-top:4px;accent-color:var(--teal-d);width:18px;height:18px;flex:none}
+.opt.right,.opt.right:has(input:checked){border-color:var(--ok);background:var(--okbg);font-weight:700}.opt.right:after{content:'✓';margin-left:auto;color:var(--ok);font-weight:800}
+.opt.wrongpick,.opt.wrongpick:has(input:checked){border-color:var(--bad);background:var(--badbg);color:var(--bad);text-decoration:line-through}
+.opt.dis{cursor:default}
+.fb{margin-top:10px;font-size:.95rem;padding:10px 12px;border-radius:12px;background:#F4F8F9;border-left:4px solid var(--teal)}
+.fb.ok{background:var(--okbg);border-color:var(--ok)}.fb.no{background:var(--badbg);border-color:var(--bad)}
+.fb b.v{font-weight:800}.fb.ok b.v{color:var(--ok)}.fb.no b.v{color:var(--bad)}
+.txtrow{display:flex;gap:8px;flex-wrap:wrap}.txtrow input{flex:1;min-width:180px;max-width:460px}
+/* Matcha */
+.rnd{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--teal-dd);margin:20px 0 8px}
+.rnd:before{content:"";width:8px;height:22px;border-radius:4px;background:var(--pink)}
+.mx{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px 18px;align-items:start}
+.mcol{display:flex;flex-direction:column;gap:8px}
+.mcol h4{margin:0 0 2px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mt,.md{font:inherit;text-align:left;padding:11px 12px;border:2px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);cursor:pointer;display:flex;gap:10px;align-items:center;transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;min-height:48px}
+.mt{font-weight:700}
+.mt:hover,.md:hover{border-color:#9ccbd3}
+.mt[aria-pressed=true]{border-color:var(--pink);background:var(--pink-l);transform:translateX(4px);box-shadow:0 0 0 4px rgba(214,51,108,.15)}
+.lt{flex:none;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-size:.85rem;font-weight:800;background:#EEF3F4;color:var(--muted)}
+.linked .lt{background:var(--lc);color:#fff}
+.mt.linked,.md.linked{border-color:var(--lc)}
+.md .lt.empty{background:transparent;border:2px dashed #c6d6da}
+.mt.ok,.md.ok{border-color:var(--ok);background:var(--okbg)}
+.mt.no,.md.no{border-color:var(--bad);background:var(--badbg)}
+.mt:disabled,.md:disabled{cursor:default}
+/* Ordna */
+.olist{list-style:none;margin:8px 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.oi{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:13px;padding:8px 8px 8px 10px;transition:transform .2s,border-color .2s,background .2s}
+.oi .pos{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:800;background:var(--teal-l);color:var(--teal-dd)}
+.oi .tx{flex:1}
+.oi .mv{display:flex;gap:6px}
+.iconbtn{font:inherit;width:42px;height:42px;border-radius:11px;border:2px solid var(--line);background:#fff;cursor:pointer;font-size:1rem;color:var(--teal-dd);display:grid;place-items:center;transition:background .15s,border-color .15s}
+.iconbtn:hover{background:var(--teal-l);border-color:var(--teal)}
+.iconbtn:disabled{opacity:.35;cursor:not-allowed}
+.oi.ok{border-color:var(--ok);background:var(--okbg)}.oi.no{border-color:var(--bad);background:var(--badbg)}
+.oi.moved{animation:nudge .35s}
+.olab{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+/* Sortera */
+.si{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:2px solid var(--line);border-radius:13px;padding:9px 10px;margin:7px 0;transition:border-color .2s,background .2s}
+.si .tx{flex:1 1 220px;font-weight:600}
+.si.ok{border-color:var(--ok);background:var(--okbg)}.si.no{border-color:var(--bad);background:var(--badbg)}
+.si .hint{flex-basis:100%;font-size:.88rem;color:var(--bad);font-weight:700}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{font:inherit;font-size:.9rem;font-weight:700;padding:7px 12px;border-radius:99px;border:2px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;min-height:40px;transition:all .15s}
+.cat:hover{border-color:#9ccbd3}
+.cat[aria-pressed=true]{background:var(--teal-dd);border-color:var(--teal-dd);color:#fff}
+.cat:disabled{cursor:default}
+.bucket{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 2px}
+.bucket span{font-size:.82rem;font-weight:700;background:var(--teal-l);color:var(--teal-dd);padding:3px 10px;border-radius:99px}
+/* Sant/falskt */
+.tfs{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.tfw{margin-top:10px;font-size:.92rem;font-weight:700;color:var(--muted)}
+/* Skriv */
+.wc{font-size:.8rem;color:var(--muted);text-align:right;margin-top:4px}
+.model{background:linear-gradient(180deg,var(--teal-l),#fff);border:1px solid #bfe2e8;border-left:5px solid var(--teal);padding:12px 14px;border-radius:12px;margin:12px 0;font-size:.97rem}
+.model b{color:var(--teal-dd)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;cursor:pointer;margin:4px 0;border:1px solid transparent}
+.chk:hover{background:#F4F8F9}
+.chk input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok);flex:none}
+.chk:has(input:checked){background:var(--okbg);border-color:#bfe3cd}
+.lvlt{font-size:.75rem;font-weight:800;padding:2px 8px;border-radius:99px;background:var(--yel-l);color:var(--yel-d);margin-left:6px;vertical-align:middle}
+/* Resultat */
+.res{display:flex;gap:18px;align-items:center;flex-wrap:wrap;animation:rise .45s both}
+.res h2{margin-bottom:2px}
+.newbest{display:inline-block;margin-top:6px;background:var(--yel);color:#3b2a00;font-weight:800;font-size:.82rem;padding:3px 10px;border-radius:99px}
+.rep{margin-top:8px;font-size:.92rem}
+.rep a{font-weight:700}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.rhead{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;font-size:.95rem}
+.kv dt{color:var(--muted);font-weight:600}.kv dd{margin:0;font-weight:700}
+.chres{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.chres .card{--c:var(--teal)}
+.chres .pink{--c:var(--pink)}.chres .yellow{--c:var(--yel)}
+.big{font-size:1.6rem;font-weight:800;color:var(--teal-dd)}
+.tlist{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.tlist li{display:grid;grid-template-columns:1fr 120px auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.tl{font-weight:700}.tl small{display:block;font-weight:600;color:var(--muted);font-size:.8rem}
+.badge{font-size:.78rem;font-weight:800;padding:4px 10px;border-radius:99px;white-space:nowrap;text-align:center}
+.badge.s{background:var(--okbg);color:var(--ok)}.badge.m{background:var(--yel-l);color:var(--yel-d)}.badge.w{background:var(--badbg);color:var(--bad)}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.pill{display:inline-block;margin:3px 4px 3px 0;padding:4px 10px;border-radius:99px;font-size:.88rem;font-weight:700}
+.pill.s{background:var(--okbg);color:var(--ok)}.pill.w{background:var(--badbg);color:var(--bad)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(30px);background:var(--teal-dd);color:#fff;font-weight:700;padding:11px 18px;border-radius:14px;box-shadow:var(--sh2);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:90}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.conf{position:fixed;top:-14px;width:10px;height:14px;border-radius:2px;z-index:99;pointer-events:none;animation:fall 2.4s linear forwards}
+details.copy{margin-top:12px}details.copy pre{white-space:pre-wrap;background:#F4F8F9;border-radius:12px;padding:12px;font-size:.88rem}
+footer.foot{max-width:980px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font-size:.85rem}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes nudge{0%{transform:scale(1)}40%{transform:scale(1.02)}100%{transform:scale(1)}}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.9}}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.chgrid,.chres{grid-template-columns:1fr}.cols2{grid-template-columns:1fr}}
+@media(max-width:560px){body{font-size:16px}#app{padding:14px 12px 70px}.logo small,.chip.hide-s{display:none}
+ .mx{grid-template-columns:1fr}.tlist li{grid-template-columns:1fr auto}.tlist li .pbar{grid-column:1/-1;order:3}.rhead{grid-template-columns:1fr;justify-items:center;text-align:center}.card{padding:15px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{
+ body{background:#fff;font-size:12pt}#bar,.noprint,.nav,#toast,footer.foot,details.copy{display:none!important}
+ .card{box-shadow:none;border:1px solid #bbb;break-inside:avoid}#app{padding:0;max-width:none}
+ .chres{grid-template-columns:repeat(3,1fr)}.tlist li{break-inside:avoid}
+ .pbar{border:1px solid #999;-webkit-print-color-adjust:exact;print-color-adjust:exact}.pbar>span,.badge,.ring{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#app">Hoppa till innehållet</a>
+<header id="bar"><div class="bi">
+ <a class="logo" href="#start" aria-label="Till startsidan"><span class="mk" aria-hidden="true">◆</span><span>Organisationskollen <small>· Kapitel 1–3</small></span></a>
+ <div class="chips"><button class="chip hide-s" id="cName" data-act="goname" type="button"></button><span class="chip" id="cMode"></span><span class="chip pts" id="cPts"></span></div>
+</div></header>
+<main id="app" tabindex="-1"></main>
+<footer class="foot noprint">Ledarskap och organisation, gymnasiet åk 2 · Lärare: Kavosh Raufi · Fungerar offline. Svaren sparas bara i den här webbläsaren.</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="live" class="sr" aria-live="polite"></div>
+<script>
+"use strict";
+var DATA={"chapters": [{"n": 1, "title": "Organisation och ledarskap i en föränderlig värld", "color": "teal"}, {"n": 2, "title": "Den ansvarstagande organisationen", "color": "pink"}, {"n": 3, "title": "Organisationer förr och nu", "color": "yellow"}], "topics": {"k1-vms": {"label": "Vision, mål och strategi", "ch": 1}, "k1-smart": {"label": "SMART och mätbara mål", "ch": 1}, "k1-liv": {"label": "Livscykel, förnyelse och nedgång", "ch": 1}, "k1-strat": {"label": "Strategi och förändring", "ch": 1}, "k2-int": {"label": "Intressenter och intressentmodellen", "ch": 2}, "k2-csr": {"label": "CSR och hållbar utveckling", "ch": 2}, "k2-ansvar": {"label": "Förtroende och ansvar: license to operate, Enron, H&M", "ch": 2}, "k2-etik": {"label": "Etik och etiskt ledarskap", "ch": 2}, "k3-hist": {"label": "Smith, Weber, Taylor och massproduktionen", "ch": 3}, "k3-byr": {"label": "Den byråkratiska modellen", "ch": 3}, "k3-krit": {"label": "Kritiken mot byråkratin", "ch": 3}, "k3-org": {"label": "Den organiska modellen och hybrider", "ch": 3}}, "ex": [{"id": "k1-match", "ch": 1, "kind": "match", "title": "Matcha: vision, strategi och förändring", "desc": "Begrepp om vision, livscykel och förändring.", "rounds": [{"pairs": [["Vision", "En långsiktig bild av ett önskat framtida läge som ska inspirera och motivera.", "k1-vms"], ["Mål", "Konkreta delsteg på vägen mot visionen, helst mätbara.", "k1-vms"], ["Strategi", "Planen för hur målen ska nås, vägen från nuläget till målet.", "k1-vms"], ["Livscykel", "Introduktion, tillväxt, mognad och förnyelse eller nedgång.", "k1-liv"], ["Stagnera", "Stå still och sluta utvecklas.", "k1-liv"]], "title": "Omgång 1"}, {"pairs": [["Dynamisk förmåga", "Förmågan att anpassa sig och ändra sig efter nya förhållanden.", "k1-strat"], ["Improvisera", "Hitta lösningar utan en färdig plan.", "k1-strat"], ["Deadline", "Tidpunkten då ett mål ska vara uppnått.", "k1-smart"], ["Synkad", "I takt med, till exempel med omvärldens förändringar.", "k1-strat"]], "title": "Omgång 2"}]}, {"id": "k1-order", "ch": 1, "kind": "order", "title": "Ordna: livscykeln och SMART", "desc": "Livscykelns faser och SMART i rätt ordning.", "rounds": [{"prompt": "Ordna livscykelns fyra faser från första till sista.", "first": "Först", "last": "Sist", "items": [["Introduktion", "k1-liv"], ["Tillväxt", "k1-liv"], ["Mognad", "k1-liv"], ["Förnyelse eller nedgång", "k1-liv"]]}, {"prompt": "Ordna kraven så att de bildar ordet SMART.", "first": "S", "last": "T", "items": [["Specifikt: tydligt vad som ska uppnås", "k1-smart"], ["Mätbart: man bestämmer direkt hur målet mäts", "k1-smart"], ["Accepterat av dem som ska uppnå det", "k1-smart"], ["Realistiskt: möjligt att nå", "k1-smart"], ["Tidsbundet: målet har en deadline", "k1-smart"]]}]}, {"id": "k1-sort", "ch": 1, "kind": "sort", "title": "Sortera: vision, mål eller strategi?", "desc": "Vision, mål och strategi samt fallen.", "rounds": [{"prompt": "Hör beskrivningen till vision, mål eller strategi?", "cats": ["Vision", "Mål", "Strategi"], "items": [["Svarar på frågan: vart vill vi på längre sikt?", 0, "k1-vms"], ["Ska inspirera och skapa samhörighet men är ofta inte mätbar", 0, "k1-vms"], ["Klarnas dröm om säkrare, enklare och roligare nätshopping", 0, "k1-vms"], ["Svarar på frågan: vad ska vi uppnå?", 1, "k1-vms"], ["Konkreta delsteg som helst ska vara SMART", 1, "k1-vms"], ["Riksdagens överskottsmål på 1 % av BNP över en konjunkturcykel", 1, "k1-smart"], ["Svarar på frågan: hur ska vi nå målen?", 2, "k1-vms"], ["Ska vara långsiktig men öppen för justeringar", 2, "k1-strat"]]}, {"prompt": "Visar fallet förnyelse eller nedgång?", "cats": ["Förnyelse", "Nedgång"], "items": [["Lego efter krisen kring år 2000", 0, "k1-liv"], ["Nike efter kritiken mot arbetsförhållanden hos underleverantörer", 0, "k1-liv"], ["Stora under omkring 700 år", 0, "k1-liv"], ["Kodak när fotografin blev digital", 1, "k1-liv"], ["Hultsfredsfestivalen efter de ekonomiska problemen", 1, "k1-liv"]]}]}, {"id": "k1-tf", "ch": 1, "kind": "tf", "title": "Sant eller falskt: förändring och mål", "desc": "Fem påståenden, välj sant eller falskt och rätt motivering.", "items": [{"s": "En vision måste alltid gå att mäta.", "v": false, "topic": "k1-vms", "why": ["Visionen är ofta inte mätbar. Det är målen som helst ska gå att mäta.", "Visionen mäts varje år i bokslutet.", "Utan mätning kan en vision inte inspirera någon."]}, {"s": "Livscykeln är inget öde. Hur det går beror på hur ledningen hanterar situationerna.", "v": true, "topic": "k1-liv", "why": ["Lego och Stora visar att en organisation kan förnya sig i stället för att gå mot nedgång.", "Alla organisationer går ofrånkomligen i konkurs efter mognadsfasen.", "Livscykeln gäller bara privata företag."]}, {"s": "Framgång i dag garanterar framgång i morgon.", "v": false, "topic": "k1-liv", "why": ["Kodak dominerade filmmarknaden men ställde inte om till digital fotografi och ansökte om konkursskydd 2012.", "Stora företag kan aldrig förlora sin marknad.", "Framgång gör det alltid lättare att se nya trender."]}, {"s": "T i SMART står för tidsbundet, alltså att målet har en deadline.", "v": true, "topic": "k1-smart", "why": ["Ett tidsbundet mål anger när det ska vara uppnått.", "Ett tidsbundet mål får ta hur lång tid som helst.", "Tidsbundet betyder att målet bara gäller under arbetstid."]}, {"s": "Henry Mintzberg menar att strategi mest handlar om att i förväg räkna ut allt som ska hända.", "v": false, "topic": "k1-strat", "why": ["Han menar att strategi handlar om att binda samman punkterna, alltså se mönster i det som faktiskt händer.", "Han menar att strategi är onödigt eftersom framtiden är osäker.", "Han menar att strategi bara handlar om ledningens värderingar."]}]}, {"id": "k1-quiz", "ch": 1, "kind": "quiz", "title": "Flerval: livscykel, vision och strategi", "desc": "Nio flervalsfrågor och tre begrepp att skriva.", "items": [{"t": "mc", "q": "Vilka är de fyra faserna i organisationens livscykel?", "opts": ["Introduktion, tillväxt, mognad och förnyelse eller nedgång", "Start, expansion, kris och konkurs", "Idé, planering, genomförande och uppföljning", "Introduktion, mognad, tillväxt och avveckling"], "why": "Livscykeln är inget öde. Hur det går beror på hur ledningen hanterar situationerna.", "topic": "k1-liv"}, {"t": "mc", "q": "Vad är typiskt för mognadsfasen?", "opts": ["Byråkratiseringen kommer och organisationen kan bli trög", "Verksamheten startas", "Organisationen växer utan regler", "All struktur försvinner"], "why": "Efter mognaden måste organisationen förnya sig, annars väntar nedgång.", "topic": "k1-liv"}, {"t": "mc", "q": "Varför gick det illa för Kodak?", "opts": ["Företaget ställde inte om till digital fotografi trots att utvecklingen var känd", "Företaget satsade för tidigt på digitalkameror", "Företaget hade för få kunder från början", "Företaget växte för långsamt i Europa"], "why": "Tidigare framgång kan göra en organisation blind. Kodak ansökte om konkursskydd 2012.", "topic": "k1-liv"}, {"t": "mc", "q": "Hur vände Lego krisen kring år 2000?", "opts": ["En ny ledare gick tillbaka till kärnan", "Lego spred sig till ännu fler verksamheter", "Lego slutade tillverka klossar", "Lego bytte namn och varumärke"], "why": "Krisen kom efter att Lego spridit sig på för mycket. Sedan 2005 har vinsterna vuxit igen.", "topic": "k1-liv"}, {"t": "mc", "q": "Vilken fråga svarar strategin på?", "opts": ["Hur ska vi nå målen?", "Vart vill vi på lång sikt?", "Vad ska vi uppnå?", "Vem ska leda organisationen?"], "why": "Visionen svarar på vart, målen på vad och strategin på hur.", "topic": "k1-vms"}, {"t": "mc", "q": "Vad står A för i SMART?", "opts": ["Accepterat", "Ambitiöst", "Avgränsat", "Anpassat"], "why": "Målet ska accepteras av dem som ska uppnå det.", "topic": "k1-smart"}, {"t": "mc", "q": "Varför är det viktigt att mål är mätbara?", "opts": ["Då går det att följa upp om målet är nått", "Då blir målet alltid lätt att nå", "Då behövs ingen strategi", "Då slipper man en deadline"], "why": "Kvalitet, till exempel i vård och skola, är ändå svår att fånga i siffror.", "topic": "k1-smart"}, {"t": "mc", "q": "Vad menar Henry Mintzberg med att strategi handlar om att binda samman punkterna?", "opts": ["Att se mönster i det som faktiskt händer", "Att följa en färdig plan steg för steg", "Att räkna ut allt i förväg", "Att rita ett organisationsschema"], "why": "Framtiden är osäker, så strategier behöver vara flexibla.", "topic": "k1-strat"}, {"t": "mc", "q": "Vad menade Jack Welch om förändring?", "opts": ["När förändringstakten inne i organisationen är lägre än utanför är slutet nära", "Organisationer bör undvika förändring", "Förändring behövs bara i kris", "Framgång i dag garanterar framgång i morgon"], "why": "Därför är det klokt att förändra sig innan man tvingas.", "topic": "k1-strat"}, {"t": "txt", "q": "Organisationens dröm om framtiden: en långsiktig bild som ska inspirera, men som ofta inte går att mäta.", "a": ["vision", "visionen", "en vision"], "shown": "Vision", "how": "Målen är de konkreta delstegen på vägen mot visionen.", "topic": "k1-vms"}, {"t": "txt", "q": "En modell för bra mål: specifikt, mätbart, accepterat, realistiskt och tidsbundet.", "a": ["smart", "smart-modellen", "smartmodellen", "smart modellen"], "shown": "SMART", "how": "Ett exempel är riksdagens överskottsmål på 1 % av BNP över en konjunkturcykel.", "topic": "k1-smart"}, {"t": "txt", "q": "Att stå still och sluta utvecklas, en risk för den organisation som inte förnyar sig.", "a": ["stagnera", "stagnation", "stagnerar", "att stagnera"], "shown": "Stagnera", "how": "Efter mognadsfasen kommer förnyelse eller nedgång.", "topic": "k1-liv"}]}, {"id": "k1-write", "ch": 1, "kind": "write", "title": "Skriv: från vision till förändring", "desc": "Fem skrivfrågor från kortsvar till resonemang.", "items": [{"q": "Förklara kort vad som menas med vision, mål och strategi för en organisation. Hur hänger de tre begreppen ihop?", "parts": ["Vision: en långsiktig bild av ett önskat framtida läge som ska inspirera och motivera, ofta inte mätbar.", "Mål: konkreta delsteg mot visionen som svarar på vad som ska uppnås, helst mätbara.", "Strategi: planen för hur målen nås, och sambandet vart (vision), vad (mål) och hur (strategi)."], "model": "En vision är en långsiktig bild av ett önskat framtida läge, organisationens dröm om vart den vill. Den är ofta inte mätbar men ska inspirera, motivera och skapa samhörighet, som Kennedys mål att sätta en människa på månen. Mål är konkreta delsteg på vägen mot visionen och svarar på vad organisationen ska uppnå. De ger riktning och energi och bör gå att mäta. Strategin är planen för hur målen ska nås. Sambandet blir: vart vill vi (vision), vad ska vi uppnå (mål) och hur ska vi nå dit (strategi).", "topic": "k1-vms", "level": "Kortsvar"}, {"q": "Ett bra mål ska vara SMART. Vad står de fem bokstäverna för? Förklara kort vad varje krav innebär och varför det är viktigt att ett mål går att mäta.", "parts": ["S och M: specifikt (tydligt vad som ska uppnås) och mätbart (man bestämmer direkt hur målet mäts).", "A, R och T: accepterat av dem som ska nå det, realistiskt att nå och tidsbundet med en deadline.", "Mätbara mål går att följa upp, man ser om målet är nått och hur långt det är kvar."], "model": "S står för specifikt: det ska vara tydligt vad som ska uppnås. M står för mätbart: man bestämmer direkt hur målet ska mätas. A står för accepterat: målet ska accepteras av dem som ska uppnå det. R står för realistiskt: målet ska gå att nå. T står för tidsbundet: målet ska ha en deadline. Mätbara mål går att följa upp, så att man ser om målet är nått och hur långt det är kvar. Kvalitet, till exempel i vård och skola, är däremot svår att fånga i siffror.", "topic": "k1-smart", "level": "Kortsvar"}, {"q": "Beskriv organisationens livscykel och dess fyra faser. Vad riskerar en organisation som inte förnyar sig? Använd ett av fallen Kodak, Lego, Hultsfredsfestivalen, Nike eller Stora som exempel.", "parts": ["De fyra faserna: introduktion, tillväxt, mognad och förnyelse eller nedgång.", "Vad som händer: mer struktur och regler i tillväxten, byråkratisering och tröghet i mognaden.", "Risken: utan förnyelse stagnerar organisationen och går mot nedgång, men livscykeln är inget öde utan beror på ledningen.", "Ett fall som kopplas till livscykeln, till exempel Kodak (nedgång) eller Lego och Stora (förnyelse)."], "model": "Organisationer har liksom människor en livscykel med fyra faser: introduktion, tillväxt, mognad och förnyelse eller nedgång. I tillväxten behövs mer struktur och regler, och i mognaden kommer byråkratiseringen så att organisationen kan bli trög. Sedan måste den förnya sig, annars riskerar den att stagnera och gå mot nedgång. Livscykeln är ändå inget öde, hur det går beror på hur ledningen hanterar situationerna. Kodak dominerade filmmarknaden men ställde inte om till digital fotografi och ansökte om konkursskydd 2012. Lego hamnade i kris kring år 2000 men en ny ledare gick tillbaka till kärnan, och sedan 2005 växer företaget igen.", "topic": "k1-liv", "level": "Förklara"}, {"q": "Henry Mintzberg menar att strategi handlar mer om att binda samman punkterna än om att hitta dem. Förklara vad han menar och varför strategier behöver vara flexibla. Nämn och förklara också två kännetecken på en bra strategi.", "parts": ["Mintzberg: strategi handlar om att se mönster i det som faktiskt händer, snarare än att räkna ut allt i förväg.", "Flexibilitet behövs eftersom framtiden är osäker och förändringstakten ökar, organisationer behöver dynamisk förmåga.", "Ett kännetecken förklarat, till exempel långsiktig men öppen för justeringar, eller samstämmig med vision och mål.", "Ett andra kännetecken förklarat, till exempel synkad med omvärldens förändringar, tar vara på framtida möjligheter eller ger konkurrensfördelar."], "model": "Strategi är planen för hur målen ska nås, men framtiden är osäker. Mintzberg menar att strategi handlar om att se mönster i det som faktiskt händer och dra slutsatser av det, snarare än att i förväg räkna ut allt. Eftersom förändringstakten ökar måste strategier vara flexibla, och organisationer behöver dynamisk förmåga och ibland improvisation. En bra strategi är långsiktig men öppen för justeringar och samstämmig med vision och mål, annars leder den åt fel håll. Den bör också vara synkad med omvärldens förändringar, ta vara på framtida möjligheter, spegla ledningens värderingar och syn på resurserna och ge konkurrensfördelar.", "topic": "k1-strat", "level": "Förklara"}, {"q": "Varför måste organisationer förändras, och varför är det klokt att förändra sig innan man tvingas till det? Ge exempel på förändringar i omvärlden och använd minst ett av fallen Kodak, Lego, Nike eller Stora. Resonera också om vad som gör det svårt att förändras i tid.", "parts": ["Organisationer är aldrig färdiga: de måste hålla takt med kraven från kunder och andra grupper, och framgång i dag garanterar inte framgång i morgon.", "Flera förändringar i omvärlden, till exempel ny teknik, nya konkurrenter, ändrade kundkrav, avregleringar, globalisering, digitalisering, åldrande befolkning och hållbarhet.", "Ett fall används och kopplas till förnyelse eller nedgång, till exempel Kodak som inte ställde om, eller Lego, Nike och Stora som förnyade sig.", "Kopplar till livscykeln: utan förnyelse väntar stagnation och nedgång, men livscykeln är inget öde utan beror på ledningen.", "Förklarar varför man bör förändra sig i tid, till exempel med Jack Welch: när förändringstakten inne är lägre än utanför är slutet nära.", "Resonerar om svårigheter, till exempel att framtiden är osäker eller att mogna och stela organisationer blir tröga.", "Drar en egen, motiverad slutsats, till exempel om flexibla strategier och dynamisk förmåga."], "model": "Organisationer är aldrig färdiga. De måste hålla takt med kraven från kunder och andra grupper, och framgång i dag garanterar inte framgång i morgon, den kan till och med vara en farlig vägvisare. Omvärlden förändras genom ny teknik, nya konkurrenter, ändrade kundkrav och avregleringar, som på skol-, vård- och apoteksmarknaden, och genom trender som globalisering, digitalisering, en åldrande befolkning och hållbarhet. Den som väntar tills den tvingas kan hamna för långt efter. Kodak dominerade filmmarknaden men ställde inte om till digital fotografi trots att utvecklingen var känd, och ansökte om konkursskydd 2012. Lego visar motsatsen: en ny ledare vände krisen genom att gå tillbaka till kärnan, och Stora har förnyat sig i omkring 700 år. Livscykeln är alltså inget öde. Jack Welch menar att när förändringstakten inne i organisationen är lägre än utanför är slutet nära. Samtidigt är det svårt: framtiden är osäker, och mogna organisationer byråkratiseras och blir tröga. Därför behöver organisationer flexibla strategier och dynamisk förmåga, och bevaka trender så att de kan ligga steget före.", "topic": "k1-strat", "level": "Resonera"}]}, {"id": "k2-match", "ch": 2, "kind": "match", "title": "Matcha: intressenter, ansvar och etik", "desc": "Intressenter, CSR, etik och etiskt ledarskap.", "rounds": [{"pairs": [["Intressent", "En part som har ett intresse i och ett utbyte med organisationen.", "k2-int"], ["Primära intressenter", "De viktigaste, utan dem fungerar inte verksamheten.", "k2-int"], ["Sekundära intressenter", "Har en svagare koppling men kan ändå påverka.", "k2-int"], ["License to operate", "Ett slags mandat från omgivningen att få verka.", "k2-ansvar"], ["CSR", "Organisationens frivilliga samhällsansvar utöver vad lagen kräver.", "k2-csr"]], "title": "Omgång 1"}, {"pairs": [["Uppförandekod", "Riktlinjer för hur man ska agera miljömässigt, socialt, etiskt och ekonomiskt riktigt.", "k2-ansvar"], ["Visselblåsare", "En person som avslöjar oetiska förhållanden i den egna organisationen, ofta via media.", "k2-etik"], ["Etiskt dilemma", "En situation där olika värden står mot varandra och inget svar är självklart.", "k2-etik"], ["Symbios", "Samlevnad, som mellan en organisation och dess omgivning.", "k2-ansvar"]], "title": "Omgång 2"}, {"title": "Omgång 3: etiskt ledarskap", "pairs": [["Trovärdighet", "Gör det du säger.", "k2-etik"], ["Ansvar", "Håll dina löften och möt de förväntningar andra har.", "k2-etik"], ["Omtanke", "Bry dig om andra och var juste.", "k2-etik"], ["Respekt", "Behandla alla med respekt.", "k2-etik"], ["Rättvisa", "Behandla alla lika och favorisera ingen.", "k2-etik"], ["Medborgarskap", "Ge mer än du tar av samhället.", "k2-etik"]]}]}, {"id": "k2-order", "ch": 2, "kind": "order", "title": "Ordna: synen på ansvar och Enron", "desc": "Aktieägar- och intressentmodellen samt Enron.", "rounds": [{"prompt": "Ordna synen på företagets ansvar i tidsordning.", "first": "Tidigast", "last": "Senast", "items": [["Aktieägarmodellen dominerar: företaget ska skapa vinst åt ägarna", "k2-int"], ["Intressentmodellen växer fram från 1970-talet", "k2-int"], ["Sedan millennieskiftet ökar kraven på socialt och miljömässigt ansvar", "k2-ansvar"]]}, {"prompt": "Ordna händelserna i Enron-skandalen från orsak till följd.", "first": "Först", "last": "Sist", "items": [["Omfattande redovisningsbedrägerier", "k2-ansvar"], ["Företaget kollapsar och går i konkurs", "k2-ansvar"], ["Tusentals anställda förlorar jobb och pensionspengar", "k2-ansvar"], ["Hårdare lagstiftning och kontroll av bolags redovisning", "k2-ansvar"]]}]}, {"id": "k2-sort", "ch": 2, "kind": "sort", "title": "Sortera: intressenter och CSR-pelare", "desc": "Primära och sekundära intressenter, CSR-pelare.", "rounds": [{"prompt": "Är det en primär eller sekundär intressent för en skola?", "cats": ["Primär", "Sekundär"], "items": [["Elever", 0, "k2-int"], ["Lärare", 0, "k2-int"], ["Övrig personal", 0, "k2-int"], ["Föräldrar", 1, "k2-int"], ["Politiker", 1, "k2-int"], ["Skattebetalare", 1, "k2-int"], ["Framtida arbetsgivare", 1, "k2-int"]]}, {"prompt": "Vilken av CSR:s tre grundpelare hör exemplet till?", "cats": ["Ekonomisk", "Ekologisk", "Social"], "items": [["Lönsamhet", 0, "k2-csr"], ["Långsiktig avkastning till ägarna", 0, "k2-csr"], ["Motverka korruption", 0, "k2-csr"], ["Minska miljöpåverkan", 1, "k2-csr"], ["Hushålla med resurser", 1, "k2-csr"], ["Livscykelperspektiv på produkter", 1, "k2-csr"], ["Goda arbetsvillkor", 2, "k2-csr"], ["Mänskliga rättigheter", 2, "k2-csr"], ["Mångfald och jämställdhet", 2, "k2-csr"], ["Inte använda barnarbete", 2, "k2-csr"]]}]}, {"id": "k2-tf", "ch": 2, "kind": "tf", "title": "Sant eller falskt: ansvar och etik", "desc": "Fem påståenden, välj sant eller falskt och rätt motivering.", "items": [{"s": "CSR innebär att företaget följer de lagar som gäller, och inget mer.", "v": false, "topic": "k2-csr", "why": ["CSR är ett frivilligt ansvar som organisationen tar utöver vad lagen kräver.", "CSR handlar bara om att öka vinsten för ägarna.", "CSR gäller bara offentliga myndigheter."]}, {"s": "I intressentmodellen bidrar varje intressent med något och förväntar sig något tillbaka.", "v": true, "topic": "k2-int", "why": ["Relationen är ett utbyte, och ledningen balanserar kraven så att alla vill fortsätta bidra.", "Intressenterna ger utan att förvänta sig något.", "Det är bara ägarna som räknas som intressenter."]}, {"s": "Föräldrar är primära intressenter för en skola.", "v": false, "topic": "k2-int", "why": ["Föräldrar har en svagare koppling men kan påverka, och är därför sekundära intressenter.", "Föräldrar är inga intressenter alls.", "Bara politiker kan vara intressenter för en skola."]}, {"s": "Enron-skandalen ledde till hårdare lagstiftning och kontroll av bolags redovisning.", "v": true, "topic": "k2-ansvar", "why": ["Efter redovisningsbedrägerierna och konkursen skärptes kontrollen av hur bolag redovisar.", "Enron gick bra och blev ett föredöme för andra företag.", "Skandalen påverkade bara Enrons ägare."]}, {"s": "Medborgarskap som grundpelare i etiskt ledarskap betyder att man ger mer än man tar av samhället.", "v": true, "topic": "k2-etik", "why": ["Medborgarskap handlar om att bidra till samhället, inte bara ta.", "Medborgarskap betyder att ledaren måste vara svensk medborgare.", "Medborgarskap betyder att man behandlar alla lika."]}]}, {"id": "k2-quiz", "ch": 2, "kind": "quiz", "title": "Flerval: intressenter, CSR och etik", "desc": "Nio flervalsfrågor och tre begrepp att skriva.", "items": [{"t": "mc", "q": "Vad innebär aktieägarmodellen?", "opts": ["Företagets uppgift är att skapa vinst åt ägarna", "Ledningen ska balansera många intressenters krav", "Företaget ska ta frivilligt samhällsansvar", "De anställda äger alltid företaget"], "why": "Kritiken är att modellen ser företaget som isolerat från samhället.", "topic": "k2-int"}, {"t": "mc", "q": "Vad blir ledningens uppgift i intressentmodellen?", "opts": ["Att balansera intressenternas krav så att alla vill fortsätta bidra", "Att bara tjäna ägarna", "Att låta kunderna bestämma allt", "Att undvika kontakt med omgivningen"], "why": "Varje intressent bidrar med något och förväntar sig något tillbaka.", "topic": "k2-int"}, {"t": "mc", "q": "Vilka är primära intressenter för en skola?", "opts": ["Elever och lärare", "Föräldrar och politiker", "Skattebetalare och framtida arbetsgivare", "Föräldrar och framtida arbetsgivare"], "why": "Utan elever och personal fungerar inte skolan. Föräldrar och politiker är sekundära intressenter.", "topic": "k2-int"}, {"t": "mc", "q": "Vad betyder license to operate?", "opts": ["Ett slags mandat från omgivningen att få verka", "Ett tillstånd att slippa skatt", "Ett körkort för företagsledare", "En licens att sälja utomlands"], "why": "Organisationer lever i symbios med sin omgivning.", "topic": "k2-ansvar"}, {"t": "mc", "q": "Vad visar Enron-skandalen?", "opts": ["Att förlorat förtroende kan fälla ett helt företag", "Att redovisningsfusk sällan upptäcks", "Att stora företag alltid överlever skandaler", "Att revisionsbyråer aldrig påverkas"], "why": "Tusentals anställda förlorade jobb och pensionspengar, och revisionsbyrån Arthur Andersen gick också under. Följden blev hårdare kontroll av redovisning.", "topic": "k2-ansvar"}, {"t": "mc", "q": "Vad innebär CSR?", "opts": ["Organisationens frivilliga samhällsansvar utöver vad lagen kräver", "Lagar som alla företag måste följa", "Ett system för att räkna ut vinsten", "En avdelning för marknadsföring"], "why": "CSR står för Corporate Social Responsibility.", "topic": "k2-csr"}, {"t": "mc", "q": "Vilka är CSR:s tre grundpelare?", "opts": ["Ekonomisk, ekologisk och social hållbarhet", "Vinst, tillväxt och marknadsandelar", "Kunder, anställda och ägare", "Vision, mål och strategi"], "why": "Grunden är hållbar utveckling.", "topic": "k2-csr"}, {"t": "mc", "q": "Varför arbetar H&M med arbetsvillkoren i fabriker som företaget inte äger?", "opts": ["Kläderna tillverkas av underleverantörer, och H&M vill använda sin storlek för att påverka i hållbar riktning", "Lagen kräver att H&M äger alla fabriker", "H&M vill sänka lönerna i fabrikerna", "Fabrikerna ägs av H&M:s kunder"], "why": "H&M har en uppförandekod för leverantörerna och arbetar med inspektioner.", "topic": "k2-ansvar"}, {"t": "mc", "q": "Vilken grundpelare i etiskt ledarskap handlar om att behandla alla lika och inte favorisera någon?", "opts": ["Rättvisa", "Omtanke", "Trovärdighet", "Medborgarskap"], "why": "Trovärdighet betyder att man gör det man säger, och medborgarskap att man ger mer än man tar av samhället.", "topic": "k2-etik"}, {"t": "txt", "q": "Den modell som dominerade fram till ungefär 1970-talet, där företagets uppgift är att skapa vinst åt ägarna.", "a": ["aktieägarmodellen", "aktieägarmodell", "aktieägar-modellen"], "shown": "Aktieägarmodellen", "how": "Den ersattes alltmer av intressentmodellen, där ledningen balanserar många intressenters krav.", "topic": "k2-int"}, {"t": "txt", "q": "Att tillgodose dagens behov utan att äventyra kommande generationers möjligheter att tillgodose sina.", "a": ["hållbar utveckling", "hållbarutveckling", "en hållbar utveckling"], "shown": "Hållbar utveckling", "how": "Det är grunden för CSR och dess tre grundpelare.", "topic": "k2-csr"}, {"t": "txt", "q": "Läran om moral, alltså om vad som är rätt och fel.", "a": ["etik", "etiken"], "shown": "Etik", "how": "Affärsetik handlar om att reflektera över rätt och fel i arbetslivet.", "topic": "k2-etik"}]}, {"id": "k2-write", "ch": 2, "kind": "write", "title": "Skriv: den ansvarstagande organisationen", "desc": "Fem skrivfrågor, bland annat ett etiskt dilemma.", "items": [{"q": "Vad är en intressent? Förklara skillnaden mellan primära och sekundära intressenter och ge minst ett exempel på vardera för en skola.", "parts": ["Intressent: en part med intresse i och utbyte med organisationen, den bidrar med något och förväntar sig något tillbaka.", "Primära intressenter är de viktigaste, utan dem fungerar inte verksamheten. Sekundära har svagare koppling men kan påverka.", "Exempel för en skola: elever och lärare är primära, till exempel föräldrar, politiker eller skattebetalare är sekundära."], "model": "En intressent är en part som har ett intresse i och ett utbyte med organisationen. Den bidrar med något och förväntar sig något tillbaka. Primära intressenter är de viktigaste, utan dem fungerar inte verksamheten. För en skola är det eleverna och lärarna och den övriga personalen. Sekundära intressenter har en svagare koppling men kan ändå påverka, för en skola till exempel föräldrar, politiker, skattebetalare och framtida arbetsgivare.", "topic": "k2-int", "level": "Kortsvar"}, {"q": "Vad står förkortningen CSR för och vad innebär det? Nämn de tre grundpelarna och ge ett exempel på vad var och en kan handla om.", "parts": ["CSR: Corporate Social Responsibility, företagets samhällsansvar på frivillig grund utöver lagkraven, med hållbar utveckling som grund.", "Ekonomisk hållbarhet, till exempel lönsamhet, långsiktig avkastning och att motverka korruption.", "Ekologisk hållbarhet, till exempel minskad miljöpåverkan och att hushålla med resurser.", "Social hållbarhet, till exempel goda arbetsvillkor, mänskliga rättigheter, jämställdhet och inget barnarbete."], "model": "CSR står för Corporate Social Responsibility, företagets samhällsansvar. Det är ett ansvar som organisationen tar frivilligt, utöver vad lagen kräver, och grunden är hållbar utveckling: att tillgodose dagens behov utan att äventyra kommande generationers möjligheter. Ekonomisk hållbarhet handlar om lönsamhet, långsiktig avkastning till ägarna och en ansvarsfull affärsetik där man motverkar korruption. Ekologisk hållbarhet handlar om att minska miljöpåverkan, hushålla med resurser och se till produkternas hela livscykel. Social hållbarhet handlar om goda arbetsvillkor, mänskliga rättigheter, mångfald och jämställdhet och om att inte använda barnarbete.", "topic": "k2-csr", "level": "Kortsvar"}, {"q": "Förklara skillnaden mellan aktieägarmodellen och intressentmodellen. Vad blir ledningens uppgift i respektive modell, och vad menas med att en organisation behöver en license to operate?", "parts": ["Aktieägarmodellen: företagets uppgift är vinst åt ägarna, dominerade till ungefär 1970-talet, kritiseras för att se företaget som isolerat.", "Intressentmodellen: företaget i ett nät av intressenter som bidrar med något och förväntar sig något tillbaka, ett utbyte.", "Ledningens uppgift: sköta företaget åt ägarna, respektive balansera intressenternas krav så att alla vill fortsätta bidra.", "License to operate: ett slags mandat från omgivningen att få verka, organisationen lever i symbios med omgivningen."], "model": "Aktieägarmodellen dominerade fram till ungefär 1970-talet. Företagets uppgift är att skapa vinst åt ägarna, och ledningen ska sköta företaget åt aktieägarna. Kritiken är att företaget ses som isolerat från samhället. Intressentmodellen växte fram från 1970-talet och placerar företaget i ett nät av intressenter, som kunder, anställda, ägare, leverantörer, stat och kommun och partners. Var och en bidrar med något och förväntar sig något tillbaka. Ledningens uppgift blir att balansera kraven så att alla vill fortsätta bidra. Organisationer lever i symbios med omgivningen och behöver ett slags mandat från den för att få verka, en license to operate.", "topic": "k2-int", "level": "Förklara"}, {"q": "Etiskt ledarskap bygger på sex grundpelare. Nämn alla sex och förklara kort vad var och en innebär.", "parts": ["Trovärdighet: gör det du säger.", "Ansvar: håll dina löften och möt de förväntningar andra har.", "Omtanke: bry dig om andra och var juste.", "Respekt: behandla alla med respekt.", "Rättvisa: behandla alla lika och favorisera ingen.", "Medborgarskap: ge mer än du tar av samhället."], "model": "Trovärdighet betyder att man gör det man säger, så att ord och handling hänger ihop. Ansvar betyder att man håller sina löften och möter de förväntningar andra har. Omtanke betyder att man bryr sig om andra och är juste. Respekt betyder att man behandlar alla med respekt. Rättvisa betyder att man behandlar alla lika och inte favoriserar någon. Medborgarskap betyder att man ger mer än man tar av samhället.", "topic": "k2-etik", "level": "Förklara"}, {"q": "Etiskt dilemma. Du har sommarjobb i en butik och trivs bra med en kollega. Efter ett tag märker du att kollegan ofta tar med sig varor och material hem utan lov. Förklara vad ett etiskt dilemma är och varför det här är ett sådant. Resonera om minst två sätt att agera med hjälp av hjälpfrågorna: Är jag bekväm med att andra får veta hur jag har gjort? Vilka effekter får beslutet? Vem påverkas? Kommer de berörda att uppfatta det som rätt och rättvist? Förklara också vad en visselblåsare är, och ta ställning till hur du borde agera.", "parts": ["Etiskt dilemma: olika värden står mot varandra och inget svar är självklart, här lojalitet mot kollegan mot ärlighet och ansvar mot arbetsgivaren.", "Minst två handlingsalternativ, till exempel att tiga, prata med kollegan eller prata med chefen.", "Använder hjälpfrågorna konkret: om du är bekväm med att andra får veta, och vilka effekter beslutet får.", "Använder hjälpfrågorna om vem som påverkas (kollegan, arbetsgivaren, övriga anställda, du själv) och om de berörda skulle uppfatta beslutet som rätt och rättvist.", "Visselblåsare: en person som avslöjar oegentligheter i den egna organisationen, ofta via media, till exempel Edward Snowden, och om det kan bli aktuellt här.", "Väger för- och nackdelar och tar ställning med en tydlig motivering.", "Kopplar till affärsetik, etisk kompetens eller grundpelarna i etiskt ledarskap, till exempel ansvar, trovärdighet eller rättvisa."], "model": "Ett etiskt dilemma är en situation där olika värden står mot varandra och det inte finns något självklart rätt svar. Här står lojalitet mot en kollega jag gillar mot ärlighet och ansvar mot arbetsgivaren. Jag kan tiga, prata med kollegan eller gå till chefen. Om jag tiger skulle jag inte vara bekväm med att andra fick veta det, och butiken fortsätter att förlora pengar. Om jag pratar med kollegan först får hen en chans att sluta, och förtroendet mellan oss kan klara det. Om jag går direkt till chefen kan kollegan förlora jobbet, men arbetsgivaren och de andra anställda skulle troligen uppfatta det som rätt och rättvist. En visselblåsare är en person som avslöjar oegentligheter i den egna organisationen, ofta via media, som Edward Snowden. Här är det rimligare att först lösa saken internt, men om stölderna fortsätter bör jag berätta för chefen. Att reflektera över rätt och fel på jobbet kallas affärsetik, och organisationer behöver etisk kompetens för att upptäcka och hantera sådana frågor.", "topic": "k2-etik", "level": "Resonera"}]}, {"id": "k3-match", "ch": 3, "kind": "match", "title": "Matcha: organisationsskolor och modeller", "desc": "Organisationsskolor, människosyn och hybrid.", "rounds": [{"pairs": [["Byråkratiska skolan", "Teori som beskriver organisationen som en maskin med regler och hierarki.", "k3-hist"], ["Scientific Management", "Vetenskaplig företagsledning: det mest effektiva sättet att utföra varje arbetsmoment.", "k3-hist"], ["Mekanisk människosyn", "Människan som en kugge som motiveras av pengar och lyder order.", "k3-krit"], ["Humanistisk människosyn", "Människan som social, tänkande och kännande, med vilja att utvecklas.", "k3-org"], ["Incitament", "Något som stimulerar eller motiverar, till exempel en bonus.", "k3-byr"]], "title": "Omgång 1"}, {"pairs": [["Decentralisering", "Makt och ansvar fördelas ut i organisationen, till dem som har kunskapen.", "k3-org"], ["Hybridorganisation", "Blandar drag från den byråkratiska och den organiska modellen.", "k3-org"], ["Informell", "Inofficiell, inte formell.", "k3-org"], ["Statisk", "Stillastående, oföränderlig.", "k3-krit"]], "title": "Omgång 2"}]}, {"id": "k3-order", "ch": 3, "kind": "order", "title": "Ordna: från nålfabrik till organisk modell", "desc": "Historien och den byråkratiska pyramiden.", "rounds": [{"prompt": "Ordna utvecklingen från nålfabriken till i dag.", "first": "Tidigast", "last": "Senast", "items": [["Adam Smith beskriver nålfabriken i The Wealth of Nations", "k3-hist"], ["Weber och Taylor formulerar sina organisationsskolor kring år 1900", "k3-hist"], ["Idéerna leder till det löpande bandet, som Henry Ford inför i bilproduktionen", "k3-hist"], ["Alfred Sloan utvecklar General Motors vidare med divisioner för olika kundgrupper", "k3-hist"], ["Snabb förändring och global konkurrens gör att den organiska modellen växer fram", "k3-org"]]}, {"prompt": "Ordna nivåerna i den byråkratiska pyramiden uppifrån och ner.", "first": "Högst upp", "last": "Längst ner", "items": [["Tänka", "k3-byr"], ["Planera", "k3-byr"], ["Kontrollera", "k3-byr"], ["Utföra", "k3-byr"]]}]}, {"id": "k3-sort", "ch": 3, "kind": "sort", "title": "Sortera: byråkratisk eller organisk?", "desc": "Fjorton drag i de två modellerna.", "rounds": [{"prompt": "Hör draget till den byråkratiska eller den organiska modellen?", "cats": ["Byråkratisk", "Organisk"], "items": [["Styrning med order och regler", 0, "k3-byr"], ["Hög formalisering", 0, "k3-byr"], ["Smal och strikt arbetsdelning", 0, "k3-byr"], ["Centraliserade beslut", 0, "k3-byr"], ["Kontroll uppifrån", 0, "k3-byr"], ["Kommunikation uppifrån och ner", 0, "k3-byr"], ["Ackordslön", 0, "k3-byr"], ["Styrning genom råd och mål", 1, "k3-org"], ["Låg formalisering", 1, "k3-org"], ["Bred och varierad arbetsdelning", 1, "k3-org"], ["Decentraliserade beslut", 1, "k3-org"], ["Egen kontroll", 1, "k3-org"], ["Kommunikation åt alla håll", 1, "k3-org"], ["Mer än lönen motiverar", 1, "k3-org"]]}]}, {"id": "k3-tf", "ch": 3, "kind": "tf", "title": "Sant eller falskt: förr och nu", "desc": "Fem påståenden, välj sant eller falskt och rätt motivering.", "items": [{"s": "Taylor kallas teoretikern och Weber praktikern.", "v": false, "topic": "k3-hist", "why": ["Det är tvärtom: sociologen Weber kallas teoretikern och ingenjören Taylor praktikern.", "Båda kallas praktiker eftersom de arbetade i fabriker.", "Ingen av dem hade med organisationsteori att göra."]}, {"s": "Byråkratiska principer kan ha positiva värden, till exempel likabehandling och rättssäkerhet.", "v": true, "topic": "k3-byr", "why": ["Hos myndigheter där alla ska behandlas lika är ordning och förutsägbarhet viktiga.", "Byråkrati är alltid negativt och bör undvikas.", "Likabehandling hör bara till den organiska modellen."]}, {"s": "I den organiska modellen fattas besluten högst upp i hierarkin.", "v": false, "topic": "k3-org", "why": ["Den organiska modellen bygger på decentralisering: beslut flyttas ut till dem som har kunskapen och är nära kunderna.", "I den organiska modellen fattas inga beslut alls.", "Besluten fattas av kunderna."]}, {"s": "Anpassningsproblemet innebär att reglerna blir viktigare än individen och verksamheten.", "v": true, "topic": "k3-krit", "why": ["Då blir det svårt att lära av misstag, förnya sig och anpassa sig till förändringar.", "Problemet är att organisationen anpassar sig för snabbt.", "Problemet är att det finns för få regler."]}, {"s": "Henry Ford gjorde bilen så dyr att bara rika kunde köpa den.", "v": false, "topic": "k3-hist", "why": ["Med det löpande bandet blev T-Forden billig nog för vanliga människor.", "Ford tillverkade bara lyxbilar för hand.", "Ford införde decentraliserade arbetslag."]}]}, {"id": "k3-quiz", "ch": 3, "kind": "quiz", "title": "Flerval: från nålfabrik till hybrid", "desc": "Nio flervalsfrågor och tre begrepp att skriva.", "items": [{"t": "mc", "q": "Vad visade Adam Smiths exempel med nålfabriken?", "opts": ["Att arbetsdelning gör att samma människor kan producera enormt mycket mer", "Att en arbetare bör göra alla moment själv", "Att maskiner alltid är bättre än människor", "Att hög lön avgör hur mycket som produceras"], "why": "Med specialister blev det ungefär 4 800 nålar per person och dag i stället för högst ungefär 20.", "topic": "k3-hist"}, {"t": "mc", "q": "Vilket par stämmer?", "opts": ["Weber: den byråkratiska skolan. Taylor: Scientific Management", "Weber: Scientific Management. Taylor: den byråkratiska skolan", "Ford: den byråkratiska skolan. Sloan: Scientific Management", "Smith: Scientific Management. Weber: det löpande bandet"], "why": "Weber var sociolog och kallas teoretikern, Taylor var ingenjör och kallas praktikern.", "topic": "k3-hist"}, {"t": "mc", "q": "Varför passade Webers och Taylors idéer kring år 1900?", "opts": ["Marknaderna var stabila och efterfrågan större än utbudet, så det gällde att producera mycket och billigt", "Konkurrensen var global och förändrades snabbt", "Arbetskraften var välutbildad och ställde krav", "Kunderna ville ha unika, anpassade produkter"], "why": "Många arbetare var lågutbildade, och ledarna tänkte medan arbetarna utförde.", "topic": "k3-hist"}, {"t": "mc", "q": "Vilken av dessa hör INTE till den byråkratiska modellens fyra grundprinciper?", "opts": ["Decentralisering", "Arbetsdelning", "Pyramidformad hierarki", "Lön efter prestation"], "why": "Decentralisering är ett kännetecken för den organiska modellen. Den fjärde byråkratiska principen är styrning med fasta regler och kontroller.", "topic": "k3-byr"}, {"t": "mc", "q": "Vad blev det praktiska resultatet av idéerna om arbetsdelning och standardisering?", "opts": ["Det löpande bandet, som Henry Ford införde i bilproduktionen", "Decentraliserade projektgrupper", "Fast lön för alla anställda", "Att varje arbetare byggde en hel bil själv"], "why": "T-Forden blev billig nog för vanliga människor. Alfred Sloan delade sedan in General Motors i divisioner.", "topic": "k3-hist"}, {"t": "mc", "q": "Vilken kritikpunkt beskrivs: organisationens egen existens och tillväxt blir målet i stället för uppdraget?", "opts": ["Representativitetsproblemet", "Effektivitetsparadoxen", "Anpassningsproblemet", "Livscykelproblemet"], "why": "Anpassningsproblemet handlar om att reglerna blir viktigare än individen och verksamheten.", "topic": "k3-krit"}, {"t": "mc", "q": "Vilken människosyn bygger den organiska modellen på?", "opts": ["En humanistisk: människan vill utvecklas, ta ansvar och motiveras av mer än pengar", "En mekanisk: människan är en kugge i maskinen", "En auktoritär: människan behöver stränga order", "En statisk: människan förändras aldrig"], "why": "Organisationen liknas vid en levande organism som anpassar sig till omgivningen.", "topic": "k3-org"}, {"t": "mc", "q": "Hur styr man i den organiska modellen?", "opts": ["Genom råd och mål", "Genom order och regler", "Genom ackordslön", "Genom hög formalisering"], "why": "Ansvar och befogenheter är inte strikt fastslagna, och kommunikationen går åt alla håll.", "topic": "k3-org"}, {"t": "mc", "q": "När passar byråkratiska principer bäst?", "opts": ["Vid stabila förhållanden och rutinarbete, och där alla ska behandlas lika", "Vid snabb förändring och stort behov av kreativitet", "I organisationer som ska förnya sig hela tiden", "Alltid, eftersom byråkrati är bäst i sig"], "why": "Ingen modell är bäst i sig. Ordning, förutsägbarhet, likabehandling och rättssäkerhet är viktigt till exempel hos myndigheter.", "topic": "k3-org"}, {"t": "txt", "q": "Lön efter hur mycket man presterar, till exempel ackord.", "a": ["prestationslön", "prestationslönen", "prestationslöner"], "shown": "Prestationslön", "how": "I dag lever den kvar som bonus och provision.", "topic": "k3-byr"}, {"t": "txt", "q": "Kritikpunkten som innebär att byråkratin är skapad för att vara effektiv men blir ineffektiv av alla regler och kontroller.", "a": ["effektivitetsparadoxen", "effektivitetsparadox", "effektivitets-paradoxen"], "shown": "Effektivitetsparadoxen", "how": "De andra två kritikpunkterna är representativitetsproblemet och anpassningsproblemet.", "topic": "k3-krit"}, {"t": "txt", "q": "Organisationer som blandar drag från den byråkratiska och den organiska modellen.", "a": ["hybridorganisationer", "hybridorganisation", "hybrider", "hybrid", "hybridorganisationerna"], "shown": "Hybridorganisationer", "how": "De rena modellerna är idealtyper, så de flesta verkliga organisationer är hybrider.", "topic": "k3-org"}]}, {"id": "k3-write", "ch": 3, "kind": "write", "title": "Skriv: byråkrati, kritik och hybrid", "desc": "Fyra skrivfrågor, bland annat om hybrid.", "items": [{"q": "Max Weber och Frederick Taylor räknas som grundare av två klassiska organisationsskolor. Vilken skola förknippas med vem? Beskriv kort grundtanken i Scientific Management och förklara hur lönen påverkas vid ackordslön.", "parts": ["Weber, sociolog: den byråkratiska skolan. Taylor, ingenjör: Scientific Management, vetenskaplig företagsledning.", "Grundtanken: hitta det bästa och mest effektiva sättet att utföra varje arbetsmoment och organisera produktionen därefter.", "Ackordslön: ju mer man producerar, desto mer betalt får man."], "model": "Sociologen Max Weber formulerade den byråkratiska skolan och kallas teoretikern. Ingenjören Frederick Taylor är fader till Scientific Management, vetenskaplig företagsledning, och kallas praktikern. Grundtanken i Scientific Management är att hitta det bästa och mest effektiva sättet att utföra varje arbetsmoment och att organisera produktionen därefter. Arbetet delas upp i små standardiserade moment, ledarna tänker och planerar och arbetarna utför. Vid ackordslön beror lönen på hur mycket man producerar: ju mer, desto mer betalt.", "topic": "k3-hist", "level": "Kortsvar"}, {"q": "Vad menas med hierarki? Nämn också tre kännetecken på den organiska modellen.", "parts": ["Hierarki: en rangordning med över- och underordnade, i den byråkratiska modellen formad som en pyramid.", "Ett första kännetecken, till exempel varierad arbetsdelning eller decentralisering.", "Två kännetecken till, till exempel styrning genom råd och mål, inte strikt fastslagna ansvarsområden eller att mer än lönen motiverar."], "model": "Hierarki är en rangordning med över- och underordnade. I den byråkratiska modellen är den formad som en pyramid där makten och tänkandet finns högst upp. Kännetecken på den organiska modellen är varierad arbetsdelning med mer helhetsinriktat arbete, decentralisering där beslut flyttas ut till dem som har kunskapen och är nära kunderna, styrning genom råd och mål i stället för order och regler, att ansvar och befogenheter inte är strikt fastslagna och att mer än lönen motiverar.", "topic": "k3-org", "level": "Kortsvar"}, {"q": "Beskriv den byråkratiska modellens fyra grundprinciper. Förklara också de tre problemen i kritiken mot byråkratin: effektivitetsparadoxen, representativitetsproblemet och anpassningsproblemet.", "parts": ["Arbetsdelning: långt driven specialisering och standardisering, enkla moment lärs snabbt och billig arbetskraft kan användas.", "Pyramidformad hierarki: makt och tänkande högst upp, ledaren beslutar och de lägre nivåerna utför.", "Styrning med fasta regler och kontroller: enhetlighet, förutsägbarhet, ordning och stabilitet, samma regler för alla.", "Lön efter prestation, till exempel ackordslön.", "Effektivitetsparadoxen: byråkratin är skapad för effektivitet men blir ineffektiv av alla regler och kontroller.", "Representativitetsproblemet: byråkratin lever sitt eget liv, den egna existensen och tillväxten blir målet i stället för uppdraget.", "Anpassningsproblemet: reglerna blir viktigare än individen och verksamheten, svårt att lära av misstag och förnya sig."], "model": "Den första principen är arbetsdelning, en långt driven specialisering och standardisering där enkla moment lärs snabbt och billig arbetskraft kan användas. Den andra är en pyramidformad hierarki där makten och tänkandet finns högst upp och de lägre nivåerna utför. Den tredje är styrning med fasta regler och kontroller, som ger enhetlighet, förutsägbarhet, ordning och stabilitet och gör arbetet opersonligt. Den fjärde är lön efter prestation, till exempel ackordslön. Kritiken riktar sig mot den mekaniska människosynen och mot att organisationen blir stel. Effektivitetsparadoxen innebär att byråkratin är skapad för effektivitet men blir ineffektiv av alla regler och kontroller. Representativitetsproblemet innebär att byråkratin lever sitt eget liv, så att den egna existensen och tillväxten blir målet i stället för uppdraget. Anpassningsproblemet innebär att reglerna blir viktigare än individen och verksamheten, så att det blir svårt att lära av misstag, förnya sig och anpassa sig till förändringar.", "topic": "k3-krit", "level": "Förklara"}, {"q": "Jämför den byråkratiska och den organiska modellen utifrån styrning, formalisering, arbetsdelning, beslut, kontroll och kommunikation. Välj sedan en verklig organisation, till exempel din skola, en snabbmatskedja, ett sjukhus eller en myndighet, och resonera om vilka drag från de två modellerna du ser där. Kan organisationen ses som en hybridorganisation?", "parts": ["Styrning och formalisering: order och regler mot råd och mål, hög mot låg formalisering.", "Arbetsdelning och beslut: smal och strikt mot bred och varierad, centraliserade mot decentraliserade beslut.", "Kontroll och kommunikation: kontroll uppifrån mot egen kontroll, kommunikation uppifrån och ner mot åt alla håll.", "Konkreta exempel på drag från båda modellerna i den valda organisationen.", "Byråkratins positiva sidor: ordning, förutsägbarhet, likabehandling och rättssäkerhet, särskilt viktigt hos myndigheter.", "Ingen modell är bäst i sig: byråkrati passar vid stabilitet och rutinarbete, den organiska modellen vid snabb förändring och behov av kompetens och kreativitet.", "Slutsats: organisationen är en hybridorganisation, eftersom de rena modellerna är idealtyper."], "model": "Den byråkratiska modellen styr med order och regler, har hög formalisering, smal och strikt arbetsdelning, centraliserade beslut, kontroll uppifrån och kommunikation uppifrån och ner. Den organiska modellen styr med råd och mål, har låg formalisering, bred och varierad arbetsdelning, decentraliserade beslut, egen kontroll och kommunikation åt alla håll. En snabbmatskedja har standardiserade arbetsmoment och fasta rutiner, vilket är byråkratiskt, men personalen kan få lösa problem själv i stunden, vilket är organiskt. Byråkratin har positiva sidor som ordning, förutsägbarhet, likabehandling och rättssäkerhet, som är särskilt viktiga hos en myndighet där alla ska behandlas lika. Samtidigt kan den bli stel. Ingen modell är bäst i sig: byråkrati passar vid stabila förhållanden och rutinarbete, den organiska modellen vid snabb förändring och behov av kompetens och kreativitet. De rena modellerna är idealtyper, så de flesta verkliga organisationer, även den här, är hybridorganisationer.", "topic": "k3-org", "level": "Resonera"}]}]};
+var STORE="prov_ledorg_kap1_3_v2";
+var EX=DATA.ex,CH=DATA.chapters,TOP=DATA.topics;
+var KIND={match:["🧩","Matcha"],order:["🔢","Rätt ordning"],sort:["🗂️","Sortera"],tf:["⚖️","Sant eller falskt"],quiz:["🎯","Flerval och begrepp"],write:["✍️","Skrivfrågor"]};
+var LC=["#1C6976","#C2255C","#8A6100","#5B4BC4","#1D7A49","#B4541A"];
+var LEVELS=[[0,"Nybörjare","🌱"],[0.2,"Grundlärling","📘"],[0.45,"Begreppskollare","🔍"],[0.7,"Strukturkollare","💼"],[0.9,"Organisationsmästare","🏆"]];
+var app=document.getElementById("app");
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function shuffle(n){var a=[],i,j,t;for(i=0;i<n;i++)a.push(i);for(i=n-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function shuffleNI(n){if(n<2)return shuffle(n);var a;do{a=shuffle(n);}while(a.every(function(v,i){return v===i;}));return a;}
+function normT(s){return String(s==null?"":s).toLowerCase().replace(/[.!?,;:]+$/,"").replace(/\s+/g," ").trim();}
+function chOf(n){return CH[n-1];}
+function exById(id){for(var i=0;i<EX.length;i++)if(EX[i].id===id)return EX[i];return null;}
+function reduced(){return window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;}
+/* ---------- Lagring ---------- */
+function fresh(){return {name:"",mode:"ovning",m:{ovning:{ex:{}},prov:{ex:{},submitted:false,at:null,started:null}},best:{}};}
+var ST;try{ST=JSON.parse(localStorage.getItem(STORE)||"null");}catch(e){ST=null;}
+if(!ST||!ST.m)ST=fresh();
+function save(){try{localStorage.setItem(STORE,JSON.stringify(ST));}catch(e){}}
+function M(){return ST.m[ST.mode];}
+function isProv(){return ST.mode==="prov";}
+function submitted(){return ST.m.prov.submitted;}
+function getS(ex){
+ var m=M(),s=m.ex[ex.id];
+ if(!s){s={ans:{},lock:{},graded:false,ord:{}};
+  if(ex.kind==="match")ex.rounds.forEach(function(r,ri){s.ord["m"+ri]=shuffle(r.pairs.length);});
+  if(ex.kind==="order")ex.rounds.forEach(function(r,ri){s.ans["o"+ri]=shuffleNI(r.items.length);});
+  if(ex.kind==="sort")ex.rounds.forEach(function(r,ri){s.ord["s"+ri]=shuffle(r.items.length);});
+  if(ex.kind==="tf")ex.items.forEach(function(it,i){s.ord["w"+i]=shuffle(it.why.length);});
+  if(ex.kind==="quiz")ex.items.forEach(function(it,i){if(it.t==="mc")s.ord["q"+i]=shuffle(it.opts.length);});
+  m.ex[ex.id]=s;save();}
+ return s;
+}
+function peekS(ex){return M().ex[ex.id]||null;}
+function isGraded(ex,s){return isProv()?submitted():!!(s&&s.graded);}
+function showFb(ex,s,key){return isGraded(ex,s)||(!isProv()&&!!s.lock[key]);}
+/* ---------- Poäng ---------- */
+function has(v){return v!==undefined&&v!==null&&v!=="";}
+function units(ex,s){
+ var a=(s&&s.ans)||{},u=[];
+ if(ex.kind==="match")ex.rounds.forEach(function(r,ri){r.pairs.forEach(function(p,pi){var v=a["m"+ri+"_"+pi];u.push({k:"m"+ri+"_"+pi,t:p[2],m:1,p:(has(v)&&Number(v)===pi)?1:0});});});
+ if(ex.kind==="order")ex.rounds.forEach(function(r,ri){var arr=a["o"+ri]||[];r.items.forEach(function(it,pos){u.push({k:"o"+ri+"_"+pos,t:it[1],m:1,p:arr[pos]===pos?1:0});});});
+ if(ex.kind==="sort")ex.rounds.forEach(function(r,ri){r.items.forEach(function(it,ii){var v=a["s"+ri+"_"+ii];u.push({k:"s"+ri+"_"+ii,t:it[2],m:1,p:(has(v)&&Number(v)===it[1])?1:0});});});
+ if(ex.kind==="tf")ex.items.forEach(function(it,i){var v=a["v"+i],w=a["w"+i];u.push({k:"v"+i,t:it.topic,m:1,p:(v===(it.v?"S":"F"))?1:0});u.push({k:"w"+i,t:it.topic,m:1,p:(has(w)&&Number(w)===0)?1:0});});
+ if(ex.kind==="quiz")ex.items.forEach(function(it,i){var v=a["q"+i],ok;if(it.t==="mc")ok=has(v)&&Number(v)===0;else{var n=normT(v);ok=n!==""&&it.a.indexOf(n)>-1;}u.push({k:"q"+i,t:it.topic,m:1,p:ok?1:0});});
+ if(ex.kind==="write")ex.items.forEach(function(it,i){it.parts.forEach(function(p,j){u.push({k:"c"+i+"_"+j,t:it.topic,m:1,p:a["c"+i+"_"+j]?1:0});});});
+ return u;
+}
+function maxPts(ex){return units(ex,null).length;}
+function score(ex,s){return units(ex,s).reduce(function(x,y){return x+y.p;},0);}
+function qCount(ex){if(ex.kind==="match")return ex.rounds.reduce(function(a,r){return a+r.pairs.length;},0);if(ex.kind==="order")return ex.rounds.length;if(ex.kind==="sort")return ex.rounds.reduce(function(a,r){return a+r.items.length;},0);return ex.items.length;}
+function answered(ex,s){
+ if(!s)return 0;var a=s.ans,n=0;
+ if(ex.kind==="match")ex.rounds.forEach(function(r,ri){r.pairs.forEach(function(p,pi){if(has(a["m"+ri+"_"+pi]))n++;});});
+ else if(ex.kind==="order")ex.rounds.forEach(function(r,ri){if(a["ot"+ri])n++;});
+ else if(ex.kind==="sort")ex.rounds.forEach(function(r,ri){r.items.forEach(function(it,ii){if(has(a["s"+ri+"_"+ii]))n++;});});
+ else if(ex.kind==="tf")ex.items.forEach(function(it,i){if(has(a["v"+i])&&has(a["w"+i]))n++;});
+ else if(ex.kind==="quiz")ex.items.forEach(function(it,i){if(has(a["q"+i])&&String(a["q"+i]).trim()!=="")n++;});
+ else ex.items.forEach(function(it,i){if(String(a["w"+i]||"").trim()!=="")n++;});
+ return n;
+}
+function stars(sc,mx){var r=mx?sc/mx:0;return r>=1?3:r>=0.8?2:r>=0.5?1:0;}
+function starsHtml(n){var h='<span class="stars" role="img" aria-label="'+n+' av 3 stjärnor">';for(var i=0;i<3;i++)h+=i<n?"★":'<span class="off">★</span>';return h+"</span>";}
+function ring(sc,mx,size,col,label){size=size||96;var sw=size>110?14:10,r=(size-sw)/2-1,c=2*Math.PI*r,f=mx?c*Math.min(sc,mx)/mx:0;var pct=mx?Math.round(100*sc/mx):0;
+ return '<div class="ring" style="width:'+size+'px;height:'+size+'px" role="img" aria-label="'+sc+' av '+mx+' poäng"><svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'"><circle class="bg" cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke-width="'+sw+'"/><circle class="fg" cx="'+size/2+'" cy="'+size/2+'" r="'+r+'" fill="none" stroke="'+(col||"#36A1B2")+'" stroke-width="'+sw+'" stroke-dasharray="'+f.toFixed(1)+' '+c.toFixed(1)+'"/></svg><div class="num"><span style="font-size:'+(size>110?"1.6rem":"1.1rem")+'">'+(label||(sc+"/"+mx))+'</span><small>'+pct+' %</small></div></div>';}
+/* Sammanställning för aktuellt läge */
+function exScore(ex){var s=peekS(ex);if(!s||!isGraded(ex,s))return null;return score(ex,s);}
+function totals(chN){var t=0,m=0,d=0,n=0;EX.forEach(function(ex){if(chN&&ex.ch!==chN)return;n++;var mx=maxPts(ex);m+=mx;var sc=exScore(ex);if(sc!==null){t+=sc;d++;}});return {t:t,m:m,d:d,n:n};}
+function topicStats(){var o={};EX.forEach(function(ex){var s=peekS(ex);if(!s||!isGraded(ex,s))return;units(ex,s).forEach(function(u){var x=o[u.t]||(o[u.t]={p:0,m:0,ex:{}});x.p+=u.p;x.m+=u.m;x.ex[ex.id]=1;});});return o;}
+function levelInfo(){var T=totals(),p=T.m?T.t/T.m:0,i=0;LEVELS.forEach(function(l,k){if(p>=l[0])i=k;});return {name:LEVELS[i][1],ico:LEVELS[i][2],p:p,next:LEVELS[i+1]||null,T:T};}
+function updateBar(){
+ var n=document.getElementById("cName"),m=document.getElementById("cMode"),p=document.getElementById("cPts");
+ n.textContent=ST.name?"👤 "+ST.name:"👤 Ange namn";
+ m.className="chip"+(isProv()?" mode-prov":"");m.textContent=isProv()?(submitted()?"📝 Prov inlämnat":"📝 Provläge"):"🎯 Övningsläge";
+ var T=totals();p.textContent="⭐ "+T.t+" p";
+}
+function toast(t){var el=document.getElementById("toast");el.textContent=t;el.classList.add("on");clearTimeout(toast._t);toast._t=setTimeout(function(){el.classList.remove("on");},2600);}
+function say(t){var el=document.getElementById("live");el.textContent="";setTimeout(function(){el.textContent=t;},40);}
+function confetti(){if(reduced())return;var cols=["#36A1B2","#D6336C","#F6C343","#1C6976","#ffffff"];for(var i=0;i<46;i++){var d=document.createElement("div");d.className="conf";d.style.left=(Math.random()*100)+"vw";d.style.background=cols[i%cols.length];d.style.animationDelay=(Math.random()*.6)+"s";d.style.animationDuration=(1.8+Math.random()*1.4)+"s";document.body.appendChild(d);(function(x){setTimeout(function(){if(x.parentNode)x.parentNode.removeChild(x);},3800);})(d);}}
+function pct(a,b){return b?Math.round(100*a/b):0;}
+function cls(n){return chOf(n).color;}
+/* ---------- Startsida ---------- */
+function exStatus(ex){
+ var s=peekS(ex),mx=maxPts(ex);
+ if(s&&isGraded(ex,s)){var sc=score(ex,s);return '<span class="st done">'+sc+'/'+mx+' p</span> '+starsHtml(stars(sc,mx));}
+ var a=answered(ex,s),q=qCount(ex);
+ if(a>0)return '<span class="st part">'+a+' av '+q+'</span>';
+ return '<span class="st">'+mx+' p</span>';
+}
+function renderStart(){
+ var L=levelInfo(),T=L.T,P=ST.m.prov;
+ var h='<section class="hero"><div class="card intro"><div class="eyebrow">Ledarskap och organisation · Gymnasiet åk 2</div><h1>Prov kapitel 1–3</h1>';
+ h+='<p class="lead">Tre kapitel, sex uppgiftstyper och direkt återkoppling. Börja var du vill, dina svar sparas automatiskt i webbläsaren.</p>';
+ h+='<div class="field"><label for="nm">Ditt namn</label><input type="text" id="nm" autocomplete="name" placeholder="Förnamn Efternamn" value="'+esc(ST.name)+'"></div>';
+ h+='<div class="field"><span style="font-weight:700;font-size:.92rem" id="mlab">Läge</span><div class="seg pink" role="group" aria-labelledby="mlab"><button type="button" data-act="mode" data-v="ovning" aria-pressed="'+(!isProv())+'">🎯 Övningsläge</button><button type="button" data-act="mode" data-v="prov" aria-pressed="'+isProv()+'">📝 Provläge</button></div>';
+ h+='<div class="modeinfo">'+(isProv()?"Provläge: du får inget facit förrän du lämnat in hela provet. Därefter rättas allt på en gång och du bedömer dina skrivsvar mot exempelsvaren.":"Övningsläge: du får återkoppling direkt efter varje svar och kan göra om övningarna hur många gånger du vill.")+'</div></div></div>';
+ var A=0,Q=0;EX.forEach(function(ex){A+=answered(ex,peekS(ex));Q+=qCount(ex);});
+ h+='<div class="card overall">'+(isProv()&&!submitted()?ring(A,Q,150,"#36A1B2",A+"<small> av "+Q+" besvarade</small>"):ring(T.t,T.m,150,"#D6336C",T.t+"<small> av "+T.m+" p</small>"))+'<div class="lvl">'+L.ico+' '+L.name+'</div><div class="lead" style="font-size:.92rem">'+T.d+' av '+T.n+' övningar '+(isProv()?(submitted()?"rättade":"inlämnas samlat"):"rättade")+'</div><a class="btn sec sm" href="#resultat">📊 Resultat och sammanfattning</a></div></section>';
+ if(isProv()){
+  if(!submitted()){var un=0,tot=0;EX.forEach(function(ex){tot+=qCount(ex);un+=qCount(ex)-answered(ex,peekS(ex));});
+   h+='<div class="card panel cta" style="margin:0 0 18px"><div><h2>Lämna in provet</h2><p class="instr" style="margin:2px 0 0">'+(un?un+" av "+tot+" uppgifter är obesvarade.":"Alla uppgifter är besvarade.")+' Facit visas när du har lämnat in.</p></div><button type="button" class="btn pri" data-act="submit" id="submitBtn">📨 Lämna in provet</button></div>';}
+  else h+='<div class="note pink" style="margin:0 0 18px"><b>Provet är inlämnat</b> '+esc(new Date(P.at).toLocaleString("sv-SE"))+'. Öppna skrivfrågorna och kryssa i vad du har med, så räknas de in i resultatet. <a href="#resultat">Se resultatet</a>.</div>';
+ }
+ h+='<div class="chgrid">';
+ CH.forEach(function(c,ci){
+  var t=totals(c.n),list=EX.filter(function(e){return e.ch===c.n;});
+  var prog=isProv()&&!submitted()?list.reduce(function(a,e){return a+answered(e,peekS(e));},0)/list.reduce(function(a,e){return a+qCount(e);},0):(t.n?t.d/t.n:0);
+  h+='<section class="card ch '+c.color+'" style="animation-delay:'+(ci*70)+'ms" aria-labelledby="ch'+c.n+'"><div class="chhead"><div class="chnum"><i></i>Kapitel '+c.n+'</div><h2 id="ch'+c.n+'">'+esc(c.title)+'</h2><div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(prog*100)+'" aria-label="Förlopp kapitel '+c.n+'"><span style="width:'+(prog*100).toFixed(1)+'%"></span></div><div class="pmeta"><span>'+(isProv()&&!submitted()?Math.round(prog*100)+" % besvarat":t.d+" av "+t.n+" klara")+'</span><span>'+t.t+' av '+t.m+' p</span></div></div><ul class="exlist">';
+  list.forEach(function(ex){var k=KIND[ex.kind];h+='<li><a href="#'+ex.id+'"><span class="exico" aria-hidden="true">'+k[0]+'</span><span class="exl"><span class="ext">'+esc(ex.title)+'</span><span class="exm">'+k[1]+'</span><span class="exs">'+exStatus(ex)+'</span></span><span class="go" aria-hidden="true">›</span></a></li>';});
+  h+='</ul></section>';
+ });
+ h+='</div>';
+ var nxt=EX.filter(function(e){var s=peekS(e);return isProv()?answered(e,s)<qCount(e):!(s&&s.graded);})[0];
+ h+='<div class="panel row noprint" style="justify-content:space-between">'+(nxt&&!(isProv()&&submitted())?'<a class="btn tea" href="#'+nxt.id+'">▶ '+(T.d||answered(nxt,peekS(nxt))?"Fortsätt":"Börja")+': '+esc(nxt.title)+'</a>':'<span></span>')+'<button type="button" class="btn ghost sm" data-act="reset" id="resetBtn">'+(isProv()?"Börja om provet":"Nollställ övningsläget")+'</button></div>';
+ app.innerHTML=h;
+}
+/* ---------- Övningsvy ---------- */
+var SEL=null,FK=null;
+function head(ex){var c=chOf(ex.ch),k=KIND[ex.kind];return '<div class="crumb"><a class="tag '+c.color+'" href="#start" aria-label="Till startsidan">← Kapitel '+ex.ch+'</a><span class="tag kind">'+k[0]+' '+k[1]+'</span><span class="tag kind">'+maxPts(ex)+' p</span></div><div class="exhead"><h1>'+esc(ex.title)+'</h1></div>';}
+function progHtml(ex,s){var n=qCount(ex),a=answered(ex,s);return '<div class="prog"><div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="'+n+'" aria-valuenow="'+a+'" aria-label="Besvarade"><span style="width:'+(n?100*a/n:0)+'%;background:var(--teal)"></span></div><span class="pt">'+a+' av '+n+' besvarade</span></div>';}
+function msg(r){return r>=1?"Full pott! Snyggt jobbat.":r>=0.8?"Mycket bra, du kan det här.":r>=0.5?"Bra jobbat. Läs förklaringarna så sitter resten snart.":"En bra början. Läs förklaringarna och försök igen.";}
+function weakIn(ex,s){var o={};units(ex,s).forEach(function(u){var x=o[u.t]||(o[u.t]={p:0,m:0});x.p+=u.p;x.m+=u.m;});return Object.keys(o).filter(function(k){return o[k].p/o[k].m<0.6;});}
+function resultCard(ex,s){var mx=maxPts(ex),sc=score(ex,s),w=weakIn(ex,s);
+ var h='<div class="card res" id="exres">'+ring(sc,mx,104,sc>=mx?"#1D7A49":"#D6336C")+'<div style="flex:1;min-width:200px"><h2>'+(ex.kind==="write"?"Din självbedömning":"Resultat")+'</h2>'+starsHtml(stars(sc,mx))+'<div>'+msg(mx?sc/mx:0)+'</div>'+(window._nb===ex.id?'<span class="newbest">🎉 Nytt personbästa</span>':'');
+ if(w.length&&ex.kind!=="write")h+='<div class="rep"><b>Repetera:</b> '+w.map(function(k){return esc(TOP[k].label);}).join(", ")+'</div>';
+ return h+'</div></div>';}
+function fbHtml(ok,v,txt){return '<div class="fb '+(ok?"ok":"no")+'"><b class="v">'+v+'</b> '+txt+'</div>';}
+function rMatch(ex,s,g){
+ var h='<p class="instr">Välj ett begrepp och sedan den förklaring som hör ihop med det. Välj en kopplad förklaring igen om du vill ta bort kopplingen.</p>';
+ ex.rounds.forEach(function(r,ri){
+  var used={};r.pairs.forEach(function(p,pi){var v=s.ans["m"+ri+"_"+pi];if(has(v))used[v]=pi;});
+  h+='<div class="rnd">'+esc(r.title)+'</div><div class="mx"><div class="mcol" role="group" aria-label="Begrepp"><h4>Begrepp</h4>';
+  r.pairs.forEach(function(p,pi){var v=s.ans["m"+ri+"_"+pi],lk=has(v),c="mt"+(lk?" linked":"")+(g?(lk&&Number(v)===pi?" ok":" no"):"");
+   h+='<button type="button" class="'+c+'" style="--lc:'+LC[pi%LC.length]+'" data-act="mt" data-r="'+ri+'" data-i="'+pi+'" data-fk="mt'+ri+'_'+pi+'" aria-pressed="'+(SEL===ri+"_"+pi)+'"'+(g?" disabled":"")+'><span class="lt">'+String.fromCharCode(65+pi)+'</span><span>'+esc(p[0])+'</span><span class="sr">'+(lk?", kopplad":"")+'</span></button>';});
+  h+='</div><div class="mcol" role="group" aria-label="Förklaringar"><h4>Förklaringar</h4>';
+  s.ord["m"+ri].forEach(function(k){var pi=used[k],lk=pi!==undefined,c="md"+(lk?" linked":"");if(g&&lk)c+=(pi===k?" ok":" no");
+   h+='<button type="button" class="'+c+'" style="--lc:'+(lk?LC[pi%LC.length]:"#ccc")+'" data-act="md" data-r="'+ri+'" data-k="'+k+'" data-fk="md'+ri+'_'+k+'"'+(g?" disabled":"")+'><span class="lt'+(lk?"":" empty")+'">'+(lk?String.fromCharCode(65+pi):"")+'</span><span>'+esc(r.pairs[k][1])+'</span>'+(lk?'<span class="sr">, kopplad till '+esc(r.pairs[pi][0])+'</span>':'')+'</button>';});
+  h+='</div></div>';
+  if(g){r.pairs.forEach(function(p,pi){var v=s.ans["m"+ri+"_"+pi],ok=has(v)&&Number(v)===pi;if(!ok)h+=fbHtml(false,esc(p[0])+":",esc(p[1])+(has(v)?' <br><small>Du kopplade till: '+esc(r.pairs[Number(v)][1])+'</small>':' <br><small>Inte kopplad.</small>'));});
+   var nok=r.pairs.filter(function(p,pi){return Number(s.ans["m"+ri+"_"+pi])===pi&&has(s.ans["m"+ri+"_"+pi]);}).length;if(nok===r.pairs.length)h+=fbHtml(true,"Alla rätt i omgången.","");}
+ });
+ return h;
+}
+function rOrder(ex,s,g){
+ var h='<p class="instr">Flytta raderna med pilknapparna tills ordningen stämmer.</p>';
+ ex.rounds.forEach(function(r,ri){var arr=s.ans["o"+ri];
+  h+='<div class="rnd">'+esc(r.prompt)+'</div><div class="olab">↑ '+esc(r.first)+'</div><ol class="olist">';
+  arr.forEach(function(idx,pos){var c="oi"+(g?(idx===pos?" ok":" no"):"")+(window._mv===ri+"_"+idx?" moved":"");
+   h+='<li class="'+c+'"><span class="pos">'+(pos+1)+'</span><span class="tx">'+esc(r.items[idx][0])+(g&&idx!==pos?'<br><small style="color:var(--bad);font-weight:700">Rätt plats: '+(idx+1)+'</small>':'')+'</span>';
+   if(!g)h+='<span class="mv"><button type="button" class="iconbtn" data-act="up" data-r="'+ri+'" data-p="'+pos+'" data-fk="up'+ri+'_'+idx+'" aria-label="Flytta upp: '+esc(r.items[idx][0])+'"'+(pos===0?" disabled":"")+'>▲</button><button type="button" class="iconbtn" data-act="down" data-r="'+ri+'" data-p="'+pos+'" data-fk="dn'+ri+'_'+idx+'" aria-label="Flytta ner: '+esc(r.items[idx][0])+'"'+(pos===arr.length-1?" disabled":"")+'>▼</button></span>';
+   h+='</li>';});
+  h+='</ol><div class="olab">↓ '+esc(r.last)+'</div>';
+  if(g){var all=arr.every(function(v,i){return v===i;});h+=all?fbHtml(true,"Rätt ordning.",""):fbHtml(false,"Rätt ordning:",r.items.map(function(it,i){return (i+1)+". "+esc(it[0]);}).join("<br>"));}
+ });
+ return h;
+}
+function rSort(ex,s,g){
+ var h='<p class="instr">Välj rätt kategori för varje rad.</p>';
+ ex.rounds.forEach(function(r,ri){
+  var cnt=r.cats.map(function(){return 0;});r.items.forEach(function(it,ii){var v=s.ans["s"+ri+"_"+ii];if(has(v))cnt[Number(v)]++;});
+  h+='<div class="rnd">'+esc(r.prompt)+'</div><div class="bucket" aria-hidden="true">'+r.cats.map(function(c,ci){return '<span>'+esc(c)+': '+cnt[ci]+'</span>';}).join("")+'</div>';
+  s.ord["s"+ri].forEach(function(ii){var it=r.items[ii],v=s.ans["s"+ri+"_"+ii],ok=has(v)&&Number(v)===it[1];
+   h+='<div class="si'+(g?(ok?" ok":" no"):"")+'"><span class="tx" id="si'+ri+'_'+ii+'">'+esc(it[0])+'</span><span class="cats" role="group" aria-labelledby="si'+ri+'_'+ii+'">';
+   r.cats.forEach(function(c,ci){h+='<button type="button" class="cat" data-act="cat" data-r="'+ri+'" data-i="'+ii+'" data-c="'+ci+'" data-fk="c'+ri+'_'+ii+'_'+ci+'" aria-pressed="'+(has(v)&&Number(v)===ci)+'"'+(g?" disabled":"")+'>'+esc(c)+'</button>';});
+   h+='</span>'+(g&&!ok?'<span class="hint">Rätt: '+esc(r.cats[it[1]])+'</span>':'')+'</div>';});
+ });
+ return h;
+}
+function rTF(ex,s,g){
+ var h='<p class="instr">Avgör om påståendet är sant eller falskt och välj den motivering som stämmer. Varje del ger 1 p.</p>';
+ ex.items.forEach(function(it,i){var v=s.ans["v"+i],w=s.ans["w"+i],fb=showFb(ex,s,"t"+i),okv=v===(it.v?"S":"F"),okw=has(w)&&Number(w)===0;
+  h+='<div class="q'+(fb?(okv&&okw?" ok":" no"):"")+'"><div class="qt"><span class="qn">'+(i+1)+'</span><span class="tfs" id="tf'+i+'">'+esc(it.s)+'</span></div>';
+  h+='<div class="seg" role="group" aria-labelledby="tf'+i+'"><button type="button" data-act="tfv" data-i="'+i+'" data-v="S" data-fk="tv'+i+'S"'+(fb?' class="'+(okv?"good":"badp")+'"':'')+' aria-pressed="'+(v==="S")+'"'+(fb?" disabled":"")+'>✔ Sant</button><button type="button" data-act="tfv" data-i="'+i+'" data-v="F" data-fk="tv'+i+'F"'+(fb?' class="'+(okv?"good":"badp")+'"':'')+' aria-pressed="'+(v==="F")+'"'+(fb?" disabled":"")+'>✖ Falskt</button></div>';
+  h+='<div class="tfw" id="tfw'+i+'">Motivering: vilken förklaring stämmer?</div><div role="radiogroup" aria-labelledby="tfw'+i+'">';
+  s.ord["w"+i].forEach(function(k){var ch=has(w)&&Number(w)===k,c="opt"+(fb?" dis":"");if(fb){if(k===0)c+=" right";else if(ch)c+=" wrongpick";}
+   h+='<label class="'+c+'"><input type="radio" name="w'+i+'" value="'+k+'" data-act="tfw" data-i="'+i+'" data-fk="tw'+i+'_'+k+'"'+(ch?" checked":"")+(fb?" disabled":"")+'><span>'+esc(it.why[k])+'</span></label>';});
+  h+='</div>';
+  if(fb)h+=fbHtml(okv&&okw,(okv?"Rätt, ":"Inte riktigt, ")+"påståendet är "+(it.v?"sant.":"falskt."),esc(it.why[0])+(okv&&!okw?" Du valde rätt svar men en annan motivering.":""));
+  h+='</div>';});
+ return h;
+}
+function rQuiz(ex,s,g){
+ var h='';
+ ex.items.forEach(function(it,i){var fb=showFb(ex,s,"q"+i),v=s.ans["q"+i],u=units(ex,s)[i],ok=u.p===1;
+  h+='<div class="q'+(fb?(ok?" ok":" no"):"")+'"><div class="qt"><span class="qn">'+(i+1)+'</span><span id="qq'+i+'">'+esc(it.q)+'</span></div>';
+  if(it.t==="mc"){h+='<div role="radiogroup" aria-labelledby="qq'+i+'">';
+   s.ord["q"+i].forEach(function(k){var ch=has(v)&&Number(v)===k,c="opt"+(fb?" dis":"");if(fb){if(k===0)c+=" right";else if(ch)c+=" wrongpick";}
+    h+='<label class="'+c+'"><input type="radio" name="q'+i+'" value="'+k+'" data-act="mc" data-i="'+i+'" data-fk="q'+i+'_'+k+'"'+(ch?" checked":"")+(fb?" disabled":"")+'><span>'+esc(it.opts[k])+'</span></label>';});
+   h+='</div>';if(fb)h+=fbHtml(ok,ok?"Rätt.":(has(v)?"Inte riktigt.":"Inte besvarad."),esc(it.why));}
+  else{h+='<div class="txtrow"><input type="text" aria-labelledby="qq'+i+'" placeholder="Skriv begreppet" autocomplete="off" autocapitalize="off" spellcheck="false" data-act="txt" data-i="'+i+'" data-fk="tx'+i+'" value="'+esc(v||"")+'"'+(fb?" disabled":"")+'>'+(!isProv()&&!fb?'<button type="button" class="btn sec sm" data-act="chk" data-i="'+i+'" data-fk="ck'+i+'">Kolla</button>':'')+'</div>';
+   if(fb)h+=fbHtml(ok,ok?"Rätt.":"Rätt svar: "+esc(it.shown)+".",esc(it.how));}
+  h+='</div>';});
+ return h;
+}
+function rWrite(ex,s,g){
+ var h='<p class="instr">'+(g?"Läs exempelsvaret och kryssa i de delar du har med i ditt eget svar. Varje del ger 1 p.":isProv()?"Skriv dina svar. Exempelsvar och självbedömning visas när provet är inlämnat.":"Skriv dina svar och klicka sedan på Visa exempelsvar.")+'</p>';
+ ex.items.forEach(function(it,i){var txt=s.ans["w"+i]||"",wc=txt.trim()?txt.trim().split(/\s+/).length:0;
+  h+='<div class="q"><div class="qt"><span class="qn">'+(i+1)+'</span><label for="wa'+i+'">'+esc(it.q)+' <span class="lvlt">'+esc(it.level)+' · '+it.parts.length+' p</span></label></div><textarea id="wa'+i+'" data-act="wtxt" data-i="'+i+'"'+(isProv()&&submitted()?" readonly":"")+'>'+esc(txt)+'</textarea><div class="wc" id="wc'+i+'">'+wc+' ord</div>';
+  if(g){h+='<div class="model"><b>Exempelsvar:</b> '+esc(it.model)+'</div><fieldset style="border:0;padding:0;margin:0"><legend style="font-weight:800;margin-bottom:4px">Jag har med:</legend>';
+   it.parts.forEach(function(p,j){h+='<label class="chk"><input type="checkbox" data-act="wchk" data-c="c'+i+'_'+j+'" data-fk="wc'+i+'_'+j+'"'+(s.ans["c"+i+"_"+j]?" checked":"")+'><span>'+esc(p)+'</span></label>';});
+   h+='</fieldset>';}
+  h+='</div>';});
+ return h;
+}
+function nextOf(ex){var i=EX.indexOf(ex);return EX[i+1]||null;}
+function renderEx(ex){
+ var s=getS(ex),g=isGraded(ex,s);
+ var h=head(ex)+(g?resultCard(ex,s):progHtml(ex,s));
+ h+={match:rMatch,order:rOrder,sort:rSort,tf:rTF,quiz:rQuiz,write:rWrite}[ex.kind](ex,s,g);
+ var n=nextOf(ex);h+='<div class="nav">';
+ if(!isProv()&&!g)h+='<button type="button" class="btn pri" data-act="grade" id="grade">'+(ex.kind==="write"?"👁 Visa exempelsvar":"✔ Rätta övningen")+'</button>';
+ if(isProv()&&!submitted())h+='<span class="note" style="flex-basis:100%">Dina svar sparas automatiskt. Facit visas när du har lämnat in provet på startsidan.</span>';
+ if(n)h+='<a class="btn '+(g||isProv()?"tea":"sec")+'" href="#'+n.id+'">Nästa: '+esc(n.title)+' →</a>';
+ else h+='<a class="btn tea" href="#'+(isProv()&&!submitted()?"start":"resultat")+'">'+(isProv()&&!submitted()?"Till inlämningen →":"Se resultatet →")+'</a>';
+ if(!isProv()&&g)h+='<button type="button" class="btn sec" data-act="redo" id="redo">↻ Gör om</button>';
+ h+='<a class="btn ghost" href="#start">Alla övningar</a></div>';
+ app.innerHTML=h;
+}
+/* ---------- Resultat ---------- */
+function summaryText(){
+ var T=totals(),lines=[],ts=topicStats(),P=ST.m.prov;
+ lines.push("Resultat: Ledarskap och organisation, kapitel 1–3");
+ lines.push("Namn: "+(ST.name||"(inget namn angivet)"));
+ lines.push("Läge: "+(isProv()?"Provläge"+(submitted()?", inlämnat "+new Date(P.at).toLocaleString("sv-SE"):", ej inlämnat"):"Övningsläge"));
+ lines.push("Utskrivet: "+new Date().toLocaleString("sv-SE"));
+ lines.push("Totalt: "+T.t+" av "+T.m+" p ("+pct(T.t,T.m)+" %), "+T.d+" av "+T.n+" övningar rättade");
+ CH.forEach(function(c){var t=totals(c.n);lines.push("Kapitel "+c.n+" "+c.title+": "+t.t+" av "+t.m+" p, "+t.d+" av "+t.n+" övningar");});
+ var st=[],we=[];Object.keys(TOP).forEach(function(k){var x=ts[k];if(!x)return;var r=x.p/x.m;if(r>=.8)st.push(TOP[k].label);else if(r<.5)we.push(TOP[k].label);});
+ lines.push("Starka områden: "+(st.join("; ")||"inga ännu"));lines.push("Att repetera: "+(we.join("; ")||"inga"));
+ EX.forEach(function(ex){var sc=exScore(ex);lines.push("  Kap "+ex.ch+", "+ex.title+": "+(sc===null?"ej rättad":sc+" av "+maxPts(ex)+" p"));});
+ return lines.join("\n");
+}
+function renderResult(){
+ var T=totals(),ts=topicStats(),P=ST.m.prov;
+ var h='<div class="crumb noprint"><a class="tag" href="#start">← Startsidan</a></div><h1>Resultat och sammanfattning</h1>';
+ if(isProv()&&!submitted()){h+='<div class="card panel"><p><b>Provet är inte inlämnat ännu.</b> Resultatet visas när du har lämnat in provet.</p><a class="btn pri" href="#start">Till inlämningen</a></div>';app.innerHTML=h;return;}
+ var wpend=EX.filter(function(ex){var s=peekS(ex);return ex.kind==="write"&&isProv()&&submitted()&&s&&score(ex,s)===0&&answered(ex,s)>0;});
+ h+='<div class="card panel rhead">'+ring(T.t,T.m,160,"#D6336C",T.t+"<small> av "+T.m+" p</small>")+'<div><dl class="kv"><dt>Namn</dt><dd>'+(ST.name?esc(ST.name):'<span style="color:var(--bad)">Inget namn</span> <a class="noprint" href="#start">Ange namn</a>')+'</dd><dt>Läge</dt><dd>'+(isProv()?"Provläge, inlämnat "+esc(new Date(P.at).toLocaleString("sv-SE")):"Övningsläge")+'</dd><dt>Datum</dt><dd>'+esc(new Date().toLocaleDateString("sv-SE"))+'</dd><dt>Rättade övningar</dt><dd>'+T.d+' av '+T.n+'</dd></dl><p style="margin-top:10px">'+msg(T.m?T.t/T.m:0)+'</p><div class="row noprint" style="margin-top:8px"><button type="button" class="btn pri sm" data-act="print">🖨️ Skriv ut</button><button type="button" class="btn sec sm" data-act="copy">📋 Kopiera resultatet</button></div></div></div>';
+ if(wpend.length)h+='<div class="note pink panel noprint"><b>Bedöm dina skrivsvar.</b> Kryssa i vad du har med i: '+wpend.map(function(e){return '<a href="#'+e.id+'">'+esc(e.title)+'</a>';}).join(", ")+'.</div>';
+ h+='<div class="chres">';
+ CH.forEach(function(c){var t=totals(c.n);h+='<div class="card '+c.color+'"><div class="chnum" style="color:var(--teal-dd)"><i style="background:var(--c)"></i>Kapitel '+c.n+'</div><h3 style="margin:4px 0 8px">'+esc(c.title)+'</h3><div class="big">'+pct(t.t,t.m)+' %</div><div class="pbar" style="margin:6px 0"><span style="width:'+pct(t.t,t.m)+'%;background:var(--c)"></span></div><div class="pmeta"><span>'+t.t+' av '+t.m+' p</span><span>'+t.d+'/'+t.n+' övningar</span></div></div>';});
+ h+='</div>';
+ var keys=Object.keys(TOP).filter(function(k){return ts[k];});
+ var strong=keys.filter(function(k){return ts[k].p/ts[k].m>=.8;}),weak=keys.filter(function(k){return ts[k].p/ts[k].m<.5;});
+ h+='<div class="cols2"><div class="card"><h2>💪 Starka områden</h2>'+(strong.length?strong.map(function(k){return '<span class="pill s">'+esc(TOP[k].label)+'</span>';}).join(""):'<p class="instr">Inga ännu. Fortsätt öva!</p>')+'</div><div class="card"><h2>🔁 Att repetera</h2>'+(weak.length?weak.map(function(k){return '<span class="pill w">'+esc(TOP[k].label)+'</span>';}).join(""):'<p class="instr">'+(keys.length?"Inget område under 50 %. Bra!":"Rätta några övningar först.")+'</p>')+'</div></div>';
+ h+='<div class="card panel"><h2>Områden per kapitel</h2>';
+ if(!keys.length)h+='<p class="instr">Här visas hur det går inom varje område när du har rättat övningar.</p>';
+ CH.forEach(function(c){var ks=keys.filter(function(k){return TOP[k].ch===c.n;});if(!ks.length)return;
+  h+='<h3 style="margin:14px 0 4px">Kapitel '+c.n+'</h3><ul class="tlist">';
+  ks.forEach(function(k){var x=ts[k],r=x.p/x.m,b=r>=.8?["s","Stark"]:r>=.5?["m","På gång"]:["w","Repetera"];
+   var links=Object.keys(x.ex).map(function(id){return '<a href="#'+id+'">'+esc(exById(id).title)+'</a>';}).join(", ");
+   h+='<li><span class="tl">'+esc(TOP[k].label)+'<small>'+x.p+' av '+x.m+' p'+(r<.8?' · <span class="noprint">Öva: '+links+'</span>':'')+'</small></span><span class="pbar" aria-hidden="true"><span style="width:'+Math.round(r*100)+'%;background:'+(r>=.8?"var(--ok)":r>=.5?"var(--yel)":"var(--bad)")+'"></span></span><span class="badge '+b[0]+'">'+b[1]+' '+Math.round(r*100)+' %</span></li>';});
+  h+='</ul>';});
+ h+='</div><details class="copy"><summary>Visa resultatet som text</summary><pre id="sumtxt">'+esc(summaryText())+'</pre></details>';
+ app.innerHTML=h;
+ if(T.m&&T.t/T.m>=.9&&!renderResult._c){renderResult._c=1;confetti();}
+}
+/* ---------- Routing ---------- */
+function route(keep){
+ var id=(location.hash||"").replace(/^#\/?/,""),ex=exById(id),y=window.scrollY;
+ SEL=keep?SEL:null;
+ if(id==="resultat")renderResult();else if(ex)renderEx(ex);else renderStart();
+ updateBar();
+ if(keep){window.scrollTo({top:y,left:0,behavior:"instant"});if(FK){var el=app.querySelector('[data-fk="'+FK+'"]');if(el&&!el.disabled)el.focus({preventScroll:true});}}
+ else{window.scrollTo({top:0,left:0,behavior:"instant"});if(id)app.focus({preventScroll:true});}
+ FK=null;window._mv=null;window._nb=null;
+}
+function cur(){return exById((location.hash||"").replace(/^#\/?/,""));}
+function lockMaybe(ex,s,key){if(!isProv())s.lock[key]=1;}
+function gradeEx(ex,s){s.graded=true;var sc=score(ex,s),mx=maxPts(ex);var old=ST.best[ex.id];if(old===undefined||sc>old){ST.best[ex.id]=sc;if(old!==undefined&&sc>old)window._nb=ex.id;}save();say("Rättat: "+sc+" av "+mx+" poäng.");if(sc>=mx&&ex.kind!=="write")confetti();}
+app.addEventListener("click",function(e){
+ var t=e.target.closest?e.target.closest("[data-act]"):null;if(!t||t.tagName==="INPUT")return;
+ var act=t.getAttribute("data-act"),ex=cur(),s=ex?getS(ex):null;
+ if(act==="mode"){var v=t.getAttribute("data-v");if(v===ST.mode)return;
+  if(v==="ovning"&&!submitted()&&Object.keys(ST.m.prov.ex).some(function(id){return answered(exById(id),ST.m.prov.ex[id])>0;})){
+   if(!window.confirm("Om du byter till övningsläget avbryts provet och dina provsvar raderas. Vill du fortsätta?"))return;ST.m.prov={ex:{},submitted:false,at:null,started:null};}
+  ST.mode=v;save();route();say(v==="prov"?"Provläge valt":"Övningsläge valt");return;}
+ if(act==="submit"){if(!t.getAttribute("data-sure")){t.setAttribute("data-sure","1");t.textContent="Klicka igen för att lämna in";toast("Klicka en gång till för att lämna in provet.");return;}
+  ST.m.prov.submitted=true;ST.m.prov.at=Date.now();save();location.hash="resultat";route();toast("Provet är inlämnat.");return;}
+ if(act==="reset"){if(!t.getAttribute("data-sure")){t.setAttribute("data-sure","1");t.textContent="Klicka igen för att bekräfta";return;}
+  if(isProv())ST.m.prov={ex:{},submitted:false,at:null,started:null};else{ST.m.ovning={ex:{}};ST.best={};}save();route();toast("Nollställt.");return;}
+ if(act==="print"){window.print();return;}
+ if(act==="copy"){copyRes();return;}
+ if(!ex)return;var g=isGraded(ex,s),r=Number(t.getAttribute("data-r")),i=Number(t.getAttribute("data-i"));
+ if(act==="grade"){gradeEx(ex,s);route();var rc=document.getElementById("exres");if(rc)rc.scrollIntoView({block:"start",behavior:reduced()?"auto":"smooth"});return;}
+ if(act==="redo"){delete ST.m.ovning.ex[ex.id];save();route();return;}
+ if(g)return;
+ if(act==="mt"){var key=r+"_"+i;SEL=SEL===key?null:key;FK="mt"+key;route(true);return;}
+ if(act==="md"){var k=t.getAttribute("data-k"),rr=ex.rounds[r];rr.pairs.forEach(function(p,j){if(String(s.ans["m"+r+"_"+j])===k)delete s.ans["m"+r+"_"+j];});
+  if(SEL&&Number(SEL.split("_")[0])===r){var pi=SEL.split("_")[1];s.ans["m"+r+"_"+pi]=Number(k);say("Kopplade "+rr.pairs[pi][0]);SEL=null;
+   var nx=rr.pairs.map(function(p,j){return j;}).filter(function(j){return !has(s.ans["m"+r+"_"+j]);})[0];FK=nx!==undefined?"mt"+r+"_"+nx:"md"+r+"_"+k;}
+  else FK="md"+r+"_"+k;save();route(true);return;}
+ if(act==="up"||act==="down"){var arr=s.ans["o"+r],p=Number(t.getAttribute("data-p")),q=act==="up"?p-1:p+1;if(q<0||q>=arr.length)return;var tmp=arr[p];arr[p]=arr[q];arr[q]=tmp;s.ans["ot"+r]=1;window._mv=r+"_"+tmp;
+  FK=(act==="up"?(q===0?"dn":"up"):(q===arr.length-1?"up":"dn"))+r+"_"+tmp;save();route(true);return;}
+ if(act==="cat"){s.ans["s"+r+"_"+i]=Number(t.getAttribute("data-c"));FK=t.getAttribute("data-fk");save();route(true);return;}
+ if(act==="tfv"){s.ans["v"+i]=t.getAttribute("data-v");if(has(s.ans["w"+i]))lockMaybe(ex,s,"t"+i);FK=t.getAttribute("data-fk");save();route(true);return;}
+ if(act==="chk"){if(String(s.ans["q"+i]||"").trim()==="")return toast("Skriv ett svar först.");lockMaybe(ex,s,"q"+i);FK="tx"+(i+1);save();route(true);return;}
+});
+app.addEventListener("change",function(e){
+ var t=e.target,act=t.getAttribute("data-act"),ex=cur();if(!ex||!act)return;var s=getS(ex),i=Number(t.getAttribute("data-i"));
+ if(act==="mc"){if(isGraded(ex,s)||s.lock["q"+i])return;s.ans["q"+i]=Number(t.value);lockMaybe(ex,s,"q"+i);FK=t.getAttribute("data-fk");save();route(true);if(!isProv())say(Number(t.value)===0?"Rätt":"Inte riktigt");return;}
+ if(act==="tfw"){if(isGraded(ex,s)||s.lock["t"+i])return;s.ans["w"+i]=Number(t.value);if(has(s.ans["v"+i]))lockMaybe(ex,s,"t"+i);FK=t.getAttribute("data-fk");save();route(true);return;}
+ if(act==="wchk"){s.ans[t.getAttribute("data-c")]=t.checked?1:0;var sc=score(ex,s);if(!isProv()){var old=ST.best[ex.id];if(old===undefined||sc>old)ST.best[ex.id]=sc;}save();var rc=document.getElementById("exres");if(rc)rc.outerHTML=resultCard(ex,s);updateBar();return;}
+});
+app.addEventListener("input",function(e){
+ var t=e.target,act=t.getAttribute("data-act");
+ if(t.id==="nm"){ST.name=t.value.trim();save();updateBar();return;}
+ var ex=cur();if(!ex||!act)return;var s=getS(ex),i=Number(t.getAttribute("data-i"));
+ if(act==="txt"){s.ans["q"+i]=t.value;save();updProg(ex,s);}
+ if(act==="wtxt"){s.ans["w"+i]=t.value;save();var wc=document.getElementById("wc"+i),v=t.value.trim();if(wc)wc.textContent=(v?v.split(/\s+/).length:0)+" ord";updProg(ex,s);}
+});
+app.addEventListener("keydown",function(e){var t=e.target;if(e.key==="Enter"&&t.getAttribute&&t.getAttribute("data-act")==="txt"&&!isProv()){e.preventDefault();var b=app.querySelector('[data-act="chk"][data-i="'+t.getAttribute("data-i")+'"]');if(b)b.click();}});
+function updProg(ex,s){var n=qCount(ex),a=answered(ex,s),b=app.querySelector(".prog .pbar span"),pt=app.querySelector(".prog .pt");if(b)b.style.width=(n?100*a/n:0)+"%";if(pt)pt.textContent=a+" av "+n+" besvarade";}
+document.getElementById("cName").addEventListener("click",function(){location.hash="start";setTimeout(function(){var n=document.getElementById("nm");if(n)n.focus();},60);});
+function copyRes(){var txt=summaryText();
+ function fallback(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy");}catch(x){}document.body.removeChild(ta);toast(ok?"Resultatet är kopierat.":"Kopiera texten under Visa resultatet som text.");if(!ok){var d=app.querySelector("details.copy");if(d)d.open=true;}}
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(function(){toast("Resultatet är kopierat.");},fallback);else fallback();}
+window.addEventListener("hashchange",function(){document.querySelectorAll(".conf").forEach(function(c){c.remove();});route();});
+route();
+</script>
+</body>
+</html>
